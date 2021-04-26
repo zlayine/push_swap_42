@@ -10,45 +10,53 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swape
+SWAP = push_swap
 
-SRC = push_swap/main.c
+CHECKER = checker
+
+SWAP_SRC = push/main.c \
+	push/swaps.c
+
+CHECKER_SRC = check/main.c
+
+UTILS_SRC = utils/utils.c
 
 LIBFT = ./libft
 
 LIBFT_LIB = $(LIBFT)/libft.a
 
-PUSH_LIB = push_swap.a
+SWAP_LIB = puash_swap.a
 
-OBJ = $(SRC:.c=.o)
+UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
-# MAIN = srcs/main.c
 
-NORMAL = $(PUSH_LIB)
-
-all: $(NAME)
-
+all: $(CHECKER) $(SWAP)
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT)
 
-$(NAME): $(OBJ) $(LIBFT_LIB)
-	@ar rcs $(PUSH_LIB) $(OBJ)
-	@gcc $(PUSH_LIB) $(LIBFT_LIB) -o $(NAME)
-	@echo "SUCCESS! NO WWW PLEAAAAAAASE ADDDDDD --------------------------------------"
+$(SWAP): $(SWAP_SRC) $(UTILS_OBJ) $(LIBFT_LIB)
+	@ar rcs $(SWAP_LIB) $(UTILS_OBJ)
+	@gcc $(SWAP_LIB) $(LIBFT_LIB) $(SWAP_SRC) -o $(SWAP)
+	@echo "SWAP IS READY! NO WWW PLEAAAAAAASE ADDDDDD --------------------------------------"
+
+$(CHECKER): $(CHECKER_SRC) $(UTILS_OBJ) $(LIBFT_LIB)
+	@ar rcs $(SWAP_LIB) $(UTILS_OBJ)
+	@gcc $(SWAP_LIB) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
+	@echo "CHECKER IS READY! NO WWW PLEAAAAAAASE ADDDDDD --------------------------------------"
+
 
 %.o: %.c
 	@gcc -c $< -o $@
 
-	# @gcc -Wall -Wextra -Werror -c $< -o $@
+# @gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT)
-	@rm -rf $(OBJ)
+	@rm -rf $(UTILS_OBJ)
 
 fclean: clean
 	@make fclean -C $(LIBFT)
-	@rm -rf $(PUSH_LIB)
-	@rm -rf $(NAME)
+	@rm -rf $(SWAP_LIB) $(SWAP) $(CHECKER)
 
 re: fclean all

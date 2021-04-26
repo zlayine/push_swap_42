@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_lst_swap(t_list *list)
+void	ft_lst_swap_sort(t_list *list)
 {
-	void	*content;
+	int content;
 
 	content = list->content;
 	list->content = list->next->content;
@@ -35,21 +35,22 @@ int cmp(int s1, int s2)
 	return (0);
 }
 
-void ft_lst_sort(t_list **begin)
+t_list *ft_lst_sort(t_list *begin)
 {
 	t_list *a;
 	t_list *b;
 
-	a = *begin;
+	a = begin;
 	while (a != NULL)
 	{
-		b = *begin;
+		b = begin;
 		while (b->next != NULL)
 		{
 			if (cmp(b->content, b->next->content) > 0)
-				ft_lst_swap(b);
+				ft_lst_swap_sort(b);
 			b = b->next;
 		}
 		a = a->next;
 	}
+	return begin;
 }
