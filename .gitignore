@@ -1,3 +1,4 @@
 a.out
-libft.a
-
+*.a
+*.o
+push_swape
