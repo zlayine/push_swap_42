@@ -24,3 +24,4 @@ void print_stacks(t_list *a, t_list *b);
 void debug(t_list **stack_a, t_list **stack_b);
 int ft_sorted(t_list *stack);
 int valid_args(char **argv);
+t_list *ft_lst_clone(t_list *list);

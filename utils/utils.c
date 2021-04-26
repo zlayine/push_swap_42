@@ -8,6 +8,21 @@ void ft_stack_add(t_list **list, int item)
 	ft_lstadd_back(list, new);
 }
 
+t_list *ft_lst_clone(t_list *list)
+{
+	t_list *clone;
+
+	while (list)
+	{
+		if (!clone)
+			clone = ft_lstnew(list->content);
+		else
+			ft_lstadd_back(&clone, ft_lstnew(list->content));
+		list = list->next;
+	}
+	return clone;
+}
+
 t_list *ft_add_items(int total, char **argv)
 {
 	int i;
@@ -19,18 +34,10 @@ t_list *ft_add_items(int total, char **argv)
 	while (++i < total)
 	{
 		item = ft_atoi(argv[i]);
-		if (!item)
-		{
-			puts("error");
-			break;
-		}
+		if (stack)
+			ft_stack_add(&stack, item);
 		else
-		{
-			if (stack)
-				ft_stack_add(&stack, item);
-			else
-				stack = ft_lstnew(item);
-		}
+			stack = ft_lstnew(item);
 	}
 	return stack;
 }
@@ -39,7 +46,7 @@ void ft_lst_swap(t_list *a, char *action)
 {
 	int tmp;
 
-	if (a)
+	if (a && a->next)
 	{
 		tmp = a->content;
 		a->content = a->next->content;
@@ -181,7 +188,7 @@ void debug(t_list **stack_a, t_list **stack_b)
 
 int ft_sorted(t_list *stack)
 {
-	while (stack->next)
+	while (stack && stack->next)
 	{
 		if (stack->content < stack->next->content)
 			stack = stack->next;
