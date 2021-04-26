@@ -21,44 +21,44 @@ t_list *ft_swap_3(t_list *stack)
 		return stack;
 	mid = stack->next;
 	last = mid->next;
-	if (stack->content < mid->content)
-	{
-		if (stack->content < last->content && mid->content > last->content)
-		{
-			ft_swapper(&stack, NULL, SA);
-			ft_swapper(&stack, NULL, RA);
-		}
-		else if (stack->content > last->content && mid->content > last->content)
-			ft_swapper(&stack, NULL, RRA);
-	}
-	else
-	{
-		if (mid->content < last->content && last->content > stack->content)
-			ft_swapper(&stack, NULL, SA);
-		else if (mid->content < last->content)
-			ft_swapper(&stack, NULL, RA);
-		else
-		{
-			ft_swapper(&stack, NULL, SA);
-			ft_swapper(&stack, NULL, RRA);
-		}
-	}
-	// if (stack->content < mid->content && stack->content < last->content && mid->content > last->content)
+	// if (stack->content < mid->content)
 	// {
-	// 	ft_swapper(&stack, NULL, SA);
-	// 	ft_swapper(&stack, NULL, RA);
+	// 	if (stack->content < last->content && mid->content > last->content)
+	// 	{
+	// 		ft_swapper(&stack, NULL, SA);
+	// 		ft_swapper(&stack, NULL, RA);
+	// 	}
+	// 	else if (stack->content > last->content && mid->content > last->content)
+	// 		ft_swapper(&stack, NULL, RRA);
 	// }
-	// else if (stack->content < mid->content && stack->content > last->content && mid->content > last->content)
-	// 	ft_swapper(&stack, NULL, RRA);
-	// else if (mid->content < last->content && last->content > stack->content)
-	// 	ft_swapper(&stack, NULL, SA);
-	// else if (mid->content < last->content)
-	// 	ft_swapper(&stack, NULL, RA);
 	// else
 	// {
-	// 	ft_swapper(&stack, NULL, RA);
-	// 	ft_swapper(&stack, NULL, SA);
+	// 	if (mid->content < last->content && last->content > stack->content)
+	// 		ft_swapper(&stack, NULL, SA);
+	// 	else if (mid->content < last->content)
+	// 		ft_swapper(&stack, NULL, RA);
+	// 	else
+	// 	{
+	// 		ft_swapper(&stack, NULL, SA);
+	// 		ft_swapper(&stack, NULL, RRA);
+	// 	}
 	// }
+	if (stack->content < mid->content && stack->content < last->content && mid->content > last->content)
+	{
+		ft_swapper(&stack, NULL, SA);
+		ft_swapper(&stack, NULL, RA);
+	}
+	else if (stack->content < mid->content && stack->content > last->content && mid->content > last->content)
+		ft_swapper(&stack, NULL, RRA);
+	else if (mid->content < last->content && last->content > stack->content)
+		ft_swapper(&stack, NULL, SA);
+	else if (mid->content < last->content)
+		ft_swapper(&stack, NULL, RA);
+	else
+	{
+		ft_swapper(&stack, NULL, SA);
+		ft_swapper(&stack, NULL, RRA);
+	}
 
 	return stack;
 }
