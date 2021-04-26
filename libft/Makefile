@@ -6,7 +6,7 @@
 #    By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/18 09:48:59 by zlayine           #+#    #+#              #
-#    Updated: 2021/04/26 12:48:52 by zlayine          ###   ########.fr        #
+#    Updated: 2021/04/26 16:01:26 by zlayine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRC = ft_atoi.c \
 	ft_arr_len.c \
 	ft_lstadd_back.c \
 	ft_lstadd_front.c \
+	ft_lst_sort.c \
 	ft_lstlast.c \
 	ft_lstnew.c \
 	ft_lstsize.c
