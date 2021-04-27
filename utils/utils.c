@@ -12,12 +12,17 @@ t_list *ft_lst_clone(t_list *list)
 {
 	t_list *clone;
 
+	clone = NULL;
 	while (list)
 	{
 		if (!clone)
+		{
 			clone = ft_lstnew(list->content);
+		}
 		else
+		{
 			ft_lstadd_back(&clone, ft_lstnew(list->content));
+		}
 		list = list->next;
 	}
 	return clone;
@@ -168,7 +173,7 @@ void print_stacks(t_list *a, t_list *b)
 		printf("%d ", b->content);
 		b = b->next;
 	}
-	printf("\n");
+	printf("\n--------------------\n");
 }
 
 void debug(t_list **stack_a, t_list **stack_b)

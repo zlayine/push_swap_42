@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/26 16:00:28 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:08:43 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,55 @@ int get_median(t_list *stack)
 	return tmp->content;
 }
 
+int get_max()
+{
+	return 0;
+}
+
+int *fetch_medians(t_list *stack, int size, int total)
+{
+	int i;
+	int save;
+	int *medians;
+	t_list *tmp;
+
+	i = 0;
+	tmp = stack;
+	save = size;
+	medians = malloc(sizeof(int) * (total + 1));
+	while (i < total)
+	{
+		size = save;
+		while (size--)
+			tmp = tmp->next;
+		medians[i] = tmp->content;
+		printf("%d \n", medians[i]);
+		i++;
+	}
+	medians[i] = 0;
+	return medians;
+}
+
+int *get_medians(t_list *stack)
+{
+	t_list *new;
+	t_list *tmp;
+	int size;
+	int *medians;
+
+
+	new = ft_lst_clone(stack);
+	tmp = ft_lst_sort(new);
+	size = ft_lstsize(tmp);
+	if (size <= 20)
+		medians = fetch_medians(tmp, size / 2, 2);
+	else if (size < 500)
+		medians = fetch_medians(tmp, size / 5, 5);
+	else if (size >= 500)
+		medians = fetch_medians(tmp, size / 12, 12);
+	return medians;
+}
+
 void ft_swap_5(t_list **stack_a, t_list **stack_b)
 {
 	int mid;
@@ -113,23 +162,76 @@ void ft_swap_5(t_list **stack_a, t_list **stack_b)
 	}
 }
 
+int arr_len(int *arr)
+{
+	int i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return i;
+}
+
+void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
+{
+	t_list *tmp;
+	int current;
+	int len;
+	int save;
+
+	current = 0;
+	tmp = *stack_a;
+	len = ft_lstsize(*stack_a) / arr_len(mids);
+	while (mids[current])
+	{
+		save = len;
+		print_stacks(*stack_a, *stack_b);
+		while (save)
+		{
+			if (tmp->content <= mids[current] && save--)
+				ft_swapper(stack_a, stack_b, PB);
+			else
+				ft_swapper(stack_a, stack_b, RA);
+		}
+		current++;
+	}
+}
+
 void ft_swap_big(t_list **stack_a, t_list **stack_b)
+{
+	int *mids;
+	int current;
+	t_list *tmp;
+
+	mids = get_medians(*stack_a);
+	tmp = *stack_a;
+	ft_split_to_b(stack_a, stack_b, mids);
+	while (!ft_sorted(*stack_a) || *stack_b)
+	{
+	}
+}
+
+void ft_swap_extra(t_list **stack_a, t_list **stack_b)
 {
 }
 
 void ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
+	int size;
 
+	size = ft_lstsize(*stack_a);
 	if (!ft_sorted(*stack_a))
 	{
-		if (ft_lstsize(*stack_a) == 2)
+		if (size == 2)
 			ft_swap_2(stack_a, 1);
-		else if (ft_lstsize(*stack_a) == 3)
+		else if (size == 3)
 			*stack_a = ft_swap_3(*stack_a);
-		else if (ft_lstsize(*stack_a) <= 5)
+		else if (size <= 5)
 			ft_swap_5(stack_a, stack_b);
-		else if (ft_lstsize(*stack_a) > 5)
+		else if (size > 5 && size < 500)
 			ft_swap_big(stack_a, stack_b);
+		else if (size > 500)
+			ft_swap_extra(stack_a, stack_b);
 	}
 }
 

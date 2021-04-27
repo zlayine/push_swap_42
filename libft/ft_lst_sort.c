@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 15:58:37 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/26 16:02:41 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:11:19 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ t_list *ft_lst_sort(t_list *begin)
 	t_list *b;
 
 	a = begin;
-	while (a != NULL)
+	while (a)
 	{
 		b = begin;
-		while (b->next != NULL)
+		while (b->next)
 		{
 			if (cmp(b->content, b->next->content) > 0)
 				ft_lst_swap_sort(b);
