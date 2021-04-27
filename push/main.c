@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/27 14:08:43 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:24:37 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,16 @@ int *fetch_medians(t_list *stack, int size, int total)
 	tmp = stack;
 	save = size;
 	medians = malloc(sizeof(int) * (total + 1));
-	while (i < total)
+	while (i < total && tmp->next)
 	{
 		size = save;
-		while (size--)
+		while (size-- && tmp->next)
 			tmp = tmp->next;
 		medians[i] = tmp->content;
-		printf("%d \n", medians[i]);
+		printf("%d %d\n", medians[i], save);
 		i++;
 	}
+
 	medians[i] = 0;
 	return medians;
 }
@@ -188,10 +189,10 @@ void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
 		print_stacks(*stack_a, *stack_b);
 		while (save)
 		{
-			if (tmp->content <= mids[current] && save--)
+			if (tmp->content < mids[current] && save--)
 				ft_swapper(stack_a, stack_b, PB);
-			else
-				ft_swapper(stack_a, stack_b, RA);
+			// else
+				// ft_swapper(stack_a, stack_b, RA);
 		}
 		current++;
 	}
@@ -206,9 +207,9 @@ void ft_swap_big(t_list **stack_a, t_list **stack_b)
 	mids = get_medians(*stack_a);
 	tmp = *stack_a;
 	ft_split_to_b(stack_a, stack_b, mids);
-	while (!ft_sorted(*stack_a) || *stack_b)
-	{
-	}
+	// while (!ft_sorted(*stack_a) || *stack_b)
+	// {
+	// }
 }
 
 void ft_swap_extra(t_list **stack_a, t_list **stack_b)

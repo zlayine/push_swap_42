@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 15:58:37 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/27 14:11:19 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:15:55 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,8 @@ void	ft_lst_swap_sort(t_list *list)
 
 int cmp(int s1, int s2)
 {
-	size_t i;
-
-	i = 0;
-	while (s1 || s2)
-	{
-		if (s1 != s2)
-			return (s1 - s2);
-		i++;
-	}
+	if (s1 != s2)
+		return (s1 - s2);
 	return (0);
 }
 
