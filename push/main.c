@@ -6,45 +6,49 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 16:41:34 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:49:36 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push.h"
 
-void	ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
+void ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 {
-	t_list	*tmp;
-	int		current;
-	int		len;
-	int		save;
+	t_list *tmp;
+	int current;
+	int len;
+	int save;
 	int curr;
+	int len_a;
+	int len_b;
 
 	current = 0;
 	tmp = *stack_a;
 	len = ft_lstsize(*stack_a) / (ft_arr_len(mids));
-	while (current < ft_arr_len(mids))
+	while (current < 4)
 	{
 		save = len;
-		while (save)
+		while (save && tmp)
 		{
 			// blan dial amine
 			curr = ft_atoi(mids[current]);
-			if (tmp->content < mids[current] && save--)
-				ft_swapper(stack_a, stack_b, PB);
+			if 
+			
 			else
 				ft_swapper(stack_a, stack_b, RA);
+			else if (tmp->content < curr && save--)
+				ft_swapper(stack_a, stack_b, PB);
 			tmp = *stack_a;
 		}
 		current++;
-		print_stacks(*stack_a, *stack_b);
+		// print_stacks(*stack_a, *stack_b);
 	}
 }
 
-void	minimize_a(t_list **stack_a, t_list **stack_b)
+void minimize_a(t_list **stack_a, t_list **stack_b)
 {
-	int	counter;
-	int	save;
+	int counter;
+	int save;
 
 	counter = get_min_list(*stack_a);
 	// printf("%d \n", counter);
@@ -70,10 +74,10 @@ void	minimize_a(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-void	ft_swap_from_b(t_list **stack_a, t_list **stack_b)
+void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 {
-	int	counter;
-	int	save;
+	int counter;
+	int save;
 
 	counter = get_max_list(*stack_b);
 	if (counter == 1)
@@ -99,9 +103,9 @@ void	ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 	}
 }
 //ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-void	ft_push_swap(t_list **stack_a, t_list **stack_b)
+void ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
-	int	size;
+	int size;
 
 	size = ft_lstsize(*stack_a);
 	if (!ft_sorted(*stack_a))
@@ -117,10 +121,10 @@ void	ft_push_swap(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
+	t_list *stack_a;
+	t_list *stack_b;
 
 	if (!valid_args(argv))
 	{

@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:22:11 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 16:40:11 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:46:14 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**fetch_medians(t_list *stack, int size, int total)
 		while (size-- && tmp->next)
 			tmp = tmp->next;
 		medians[i] = ft_itoa(tmp->content);
-		printf("MD: %s\n", medians[i]);
+		// printf("MD: %s\n", medians[i]);
 		i++;
 	}
 	medians[i] = 0;
@@ -58,7 +58,7 @@ char	**get_medians(t_list *stack)
 	t_list	*new;
 	t_list	*tmp;
 	int		size;
-	int		*medians;
+	char	**medians;
 
 	new = ft_lst_clone(stack);
 	tmp = ft_lst_sort(new);

@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:23 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 16:25:47 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:48:19 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 		ft_lst_reshift(stack_a, action);
 		ft_lst_reshift(stack_b, action);
 	}
-	// puts(action);
+	puts(action);
 }
 
 void print_stacks(t_list *a, t_list *b)
