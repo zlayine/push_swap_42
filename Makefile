@@ -6,7 +6,7 @@
 #    By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/14 12:07:00 by zlayine           #+#    #+#              #
-#    Updated: 2021/04/26 12:41:13 by zlayine          ###   ########.fr        #
+#    Updated: 2021/04/28 13:47:59 by zlayine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,10 @@ SWAP = push_swap
 CHECKER = checker
 
 SWAP_SRC = push/main.c \
-	push/swaps.c
+	push/swaps.c \
+	push/helpers.c \
+	push/median.c \
+	push/rotate.c
 
 CHECKER_SRC = check/main.c
 

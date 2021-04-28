@@ -1,36 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/28 13:20:41 by zlayine           #+#    #+#             */
+/*   Updated: 2021/04/28 13:37:04 by zlayine          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push.h"
 
-void ft_checker(t_list **stack_a, t_list **stack_b)
+void	ft_checker(t_list **stack_a, t_list **stack_b)
 {
-	char *line;
-	int r;
+	char	*line;
+	int		r;
 
 	r = 1;
 	while (r)
 	{
-		// print_stacks(*stack_a, *stack_b);
 		r = get_next_line(0, &line);
 		ft_swapper(stack_a, stack_b, line);
 	}
 	if (ft_sorted(*stack_a))
-		puts("OK");
+		ft_putendl_fd("OK", 1);
 	else
-		puts("KO");
+		ft_putendl_fd("KO", 1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_list *stack_a;
-	t_list *stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 
 	if (!valid_args(argv))
 	{
-		puts("Error");
-		return 1;
+		ft_putendl_fd("Error", 1);
+		return (1);
 	}
 	stack_b = NULL;
 	stack_a = ft_add_items(argc, argv);
 	print_stacks(stack_a, stack_b);
 	ft_checker(&stack_a, &stack_b);
 	// print_stacks(stack_a, stack_b);
+	return (0);
 }

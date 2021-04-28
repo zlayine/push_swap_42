@@ -38,3 +38,6 @@ void minimize_a(t_list **stack_a, t_list **stack_b);
 void ft_swap_from_b(t_list **stack_a, t_list **stack_b);
 void ft_swap_big(t_list **stack_a, t_list **stack_b);
 void ft_push_swap(t_list **stack_a, t_list **stack_b);
+void	ft_swap_2(t_list **stack, int rev);
+void	rotate_stack_a(t_list **stack, char *action, int direction, int counter);
+void	rotate_stack_b(t_list **stack, char *action, int direction, int counter);
