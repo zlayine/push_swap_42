@@ -12,6 +12,36 @@
 
 #include "../includes/push.h"
 
+void get_rot_less_med(t_list **stack, int med)
+{
+	int i;
+	int size;
+	t_list *tmp;
+
+	tmp = *stack;
+	i = 0;
+	size = ft_lstsize(*stack);
+	while (tmp)
+	{
+		if (tmp->content < med)
+			break;
+		i++;
+		tmp = tmp->next;
+	}
+	// printf("%d %d\n", i, med);
+	// puts("before");
+	// puts("rot");
+	print_stacks(*stack, NULL);
+	// printf("%d %d %d\n", tmp->content, size, i);
+	if (i <= size / 2)
+		rotate_stack_a(stack, RA, 0, i);
+	else
+		rotate_stack_a(stack, RRA, 1, i);
+	// puts("end rot");
+	// puts("after");
+	// print_stacks(*stack, NULL);
+}
+
 void ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 {
 	t_list *tmp;
@@ -19,26 +49,26 @@ void ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 	int len;
 	int save;
 	int curr;
-	int len_a;
-	int len_b;
 
 	current = 0;
 	tmp = *stack_a;
 	len = ft_lstsize(*stack_a) / (ft_arr_len(mids));
-	while (current < 4)
+	while (current < ft_arr_len(mids) - 1)
 	{
 		save = len;
 		while (save && tmp)
 		{
 			// blan dial amine
 			curr = ft_atoi(mids[current]);
-			if 
-			
-			else
-				ft_swapper(stack_a, stack_b, RA);
-			else if (tmp->content < curr && save--)
+			if (tmp->content < curr && save--)
 				ft_swapper(stack_a, stack_b, PB);
+			else
+			{
+				get_rot_less_med(stack_a, curr);
+				// ft_swapper(stack_a, stack_b, RA);
+			}
 			tmp = *stack_a;
+			// print_stacks(*stack_a, *stack_b);
 		}
 		current++;
 		// print_stacks(*stack_a, *stack_b);
@@ -51,7 +81,6 @@ void minimize_a(t_list **stack_a, t_list **stack_b)
 	int save;
 
 	counter = get_min_list(*stack_a);
-	// printf("%d \n", counter);
 	if (counter == 1)
 	{
 		ft_swapper(stack_a, stack_b, SA);
@@ -65,11 +94,12 @@ void minimize_a(t_list **stack_a, t_list **stack_b)
 		else
 			rotate_stack_a(stack_a, RA, 0, counter);
 		ft_swapper(stack_a, stack_b, PB);
+		// print_stacks(*stack_a, *stack_b);
 		counter = save;
-		if (counter > ft_lstsize(*stack_a) / 2)
-			rotate_stack_a(stack_a, RA, 1, counter);
-		else
-			rotate_stack_a(stack_a, RRA, 0, counter);
+		// if (counter > ft_lstsize(*stack_a) / 2)
+		// 	rotate_stack_a(stack_a, RA, 1, counter);
+		// else
+		// 	rotate_stack_a(stack_a, RRA, 0, counter);
 		// print_stacks(*stack_a, *stack_b);
 	}
 }
@@ -96,13 +126,13 @@ void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 		counter = save;
 		if (ft_lstsize(*stack_b) == 1)
 			ft_swapper(stack_a, stack_b, PA);
-		else if (ft_lstsize(*stack_b) > 1 && counter > ft_lstsize(*stack_b) / 2)
-			rotate_stack_b(stack_b, RB, 1, counter);
-		else if (ft_lstsize(*stack_b) > 1)
-			rotate_stack_b(stack_b, RRB, 0, counter);
+		// else if (ft_lstsize(*stack_b) > 1 && counter > ft_lstsize(*stack_b) / 2)
+		// 	rotate_stack_b(stack_b, RB, 1, counter);
+		// else if (ft_lstsize(*stack_b) > 1)
+		// 	rotate_stack_b(stack_b, RRB, 0, counter);
 	}
 }
-//ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
+
 void ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
 	int size;
@@ -139,6 +169,7 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	ft_push_swap(&stack_a, &stack_b);
+	// print_stacks(stack_a, stack_b);
 	ft_lstclear(&stack_a);
 	return (0);
 }

@@ -12,12 +12,12 @@
 
 #include "../includes/push.h"
 
-void	ft_swap_big(t_list **stack_a, t_list **stack_b)
+void ft_swap_big(t_list **stack_a, t_list **stack_b)
 {
-	char	**mids;
-	int		current;
-	t_list	*tmp;
-	int		size;
+	char **mids;
+	int current;
+	t_list *tmp;
+	int size;
 
 	mids = get_medians(*stack_a);
 	tmp = *stack_a;
@@ -28,7 +28,7 @@ void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 		size = ft_lstsize(*stack_a);
 		if (ft_sorted(*stack_a) && *stack_b)
 			ft_swap_from_b(stack_a, stack_b);
-		else if (size == 5)
+		else if (size <= 5)
 			ft_swap_5(stack_a, stack_b);
 		else
 			minimize_a(stack_a, stack_b);
@@ -36,25 +36,25 @@ void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 	ft_del(mids);
 }
 
-void	ft_swap_5(t_list **stack_a, t_list **stack_b)
+void ft_swap_5(t_list **stack_a, t_list **stack_b)
 {
-	int		mid;
-	t_list	*tmp;
+	int mid;
+	t_list *tmp;
 
 	mid = get_median(*stack_a);
 	tmp = *stack_a;
-	if (get_max_list(*stack_a) == 0)
-		ft_swapper(stack_a, stack_b, RA);
+	// if (get_max_list(*stack_a) == 0)
+		// ft_swapper(stack_a, stack_b, RA);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		tmp = *stack_a;
 		if (ft_lstsize(*stack_a) == 3)
 		{
 			*stack_a = ft_swap_3(*stack_a);
-			ft_swap_2(stack_b, 0);
+			ft_swap_2(stack_b, 1);
 			ft_swapper(stack_a, stack_b, PA);
 			ft_swapper(stack_a, stack_b, PA);
-			break ;
+			break;
 		}
 		else if (tmp->content < mid)
 			ft_swapper(stack_a, stack_b, PB);
@@ -65,10 +65,10 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-t_list	*ft_swap_3(t_list *stack)
+t_list *ft_swap_3(t_list *stack)
 {
-	int	mid;
-	int	last;
+	int mid;
+	int last;
 
 	if (ft_sorted(stack))
 		return (stack);
@@ -93,7 +93,7 @@ t_list	*ft_swap_3(t_list *stack)
 	return (stack);
 }
 
-void	ft_swap_2(t_list **stack, int rev)
+void ft_swap_2(t_list **stack, int rev)
 {
 	if (ft_sorted(*stack) || rev)
 		ft_swapper(stack, NULL, SA);
