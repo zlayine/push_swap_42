@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 10:41:20 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 10:47:41 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int *fetch_medians(t_list *stack, int size, int total)
 		while (size-- && tmp->next)
 			tmp = tmp->next;
 		medians[i] = tmp->content;
-		// printf("%d %d\n", medians[i], save);
 		i++;
 	}
 
@@ -142,7 +141,6 @@ void ft_swap_5(t_list **stack_a, t_list **stack_b)
 	tmp = *stack_a;
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
-		// print_stacks(*stack_a, *stack_b);
 		tmp = *stack_a;
 		if (ft_lstsize(*stack_a) == 3)
 		{
@@ -183,14 +181,11 @@ void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
 	current = 0;
 	tmp = *stack_a;
 	len = ft_lstsize(*stack_a) / (arr_len(mids) + 1);
-	// printf("len split: %d\n", len);
 	while (mids[current])
 	{
 		save = len;
-		// print_stacks(*stack_a, *stack_b);
 		while (save)
 		{
-			// printf("split: C: %d | %d\n", tmp->content, mids[current]);
 			if (tmp->content < mids[current] && save--)
 				ft_swapper(stack_a, stack_b, PB);
 			else
@@ -199,63 +194,15 @@ void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
 		}
 		current++;
 	}
-	// print_stacks(*stack_a, *stack_b);
 }
 
-void minimize_a(t_list **stack_a, t_list **stack_b)
-{
-	int size;
-	t_list *min;
-	t_list *tmp;
-	int counter;
-	int save;
-	char *action;
-
-	counter = 0;
-	size = ft_lstsize(*stack_a);
-	min = *stack_a;
-	tmp = (*stack_a)->next;
-	while (tmp)
-	{
-		if (min->content > tmp->content)
-		{
-			min = tmp;
-			counter++;
-		}
-		tmp = tmp->next;
-	}
-	save = counter;
-	if (counter == 1)
-	{
-		ft_swapper(stack_a, stack_b, SA);
-		ft_swapper(stack_a, stack_b, PB);
-	}
-	else
-	{
-		if (counter > size / 2)
-			while (counter++ < ft_lstsize(*stack_a))
-				ft_swapper(stack_a, stack_b, RRA);
-		else
-			while (counter--)
-				ft_swapper(stack_a, stack_b, RA);
-		ft_swapper(stack_a, stack_b, PB);
-		counter = save;
-		if (counter > size / 2)
-			while (counter++ < ft_lstsize(*stack_a))
-				ft_swapper(stack_a, stack_b, RA);
-		else
-			while (counter--)
-				ft_swapper(stack_a, stack_b, RRA);
-	}
-}
-
-int		get_min_max(t_list *stack)
+int get_max_list(t_list *stack)
 {
 	int counter;
 	int save;
 	t_list *tmp;
 	t_list *curr;
-	
+
 	counter = 0;
 	save = 0;
 	curr = stack;
@@ -273,15 +220,67 @@ int		get_min_max(t_list *stack)
 	return save;
 }
 
-void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
+int get_min_list(t_list *stack)
 {
-	int size;
+	int counter;
+	int save;
+	t_list *tmp;
+	t_list *curr;
+
+	counter = 0;
+	save = 0;
+	curr = stack;
+	tmp = stack;
+	while (tmp)
+	{
+		if (curr->content > tmp->content)
+		{
+			curr = tmp;
+			save = counter;
+		}
+		counter++;
+		tmp = tmp->next;
+	}
+	return save;
+}
+
+void minimize_a(t_list **stack_a, t_list **stack_b)
+{
 	int counter;
 	int save;
 
-	save = 0;
-	size = ft_lstsize(*stack_b);
-	counter = get_min_max(*stack_b);
+	counter = get_min_list(*stack_a);
+	if (counter == 1)
+	{
+		ft_swapper(stack_a, stack_b, SA);
+		ft_swapper(stack_a, stack_b, PB);
+	}
+	else
+	{
+		save = counter;
+		if (counter > ft_lstsize(*stack_a) / 2)
+			while (counter++ < ft_lstsize(*stack_a))
+				ft_swapper(stack_a, stack_b, RRA);
+		else
+			while (counter--)
+				ft_swapper(stack_a, stack_b, RA);
+		ft_swapper(stack_a, stack_b, PB);
+		counter = save;
+		if (counter > ft_lstsize(*stack_a) / 2)
+			while (counter++ < ft_lstsize(*stack_a))
+				ft_swapper(stack_a, stack_b, RA);
+		else
+			while (counter--)
+				ft_swapper(stack_a, stack_b, RRA);
+	}
+}
+
+void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
+{
+	int counter;
+	int save;
+
+	counter = get_max_list(*stack_b);
 	if (counter == 1)
 	{
 		ft_swapper(stack_a, stack_b, SB);
@@ -290,7 +289,7 @@ void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 	else
 	{
 		save = counter;
-		if (counter > size / 2)
+		if (counter > ft_lstsize(*stack_b) / 2)
 			while (counter++ < ft_lstsize(*stack_a))
 				ft_swapper(stack_a, stack_b, RRB);
 		else
@@ -302,7 +301,7 @@ void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 			ft_swapper(stack_a, stack_b, PA);
 		else
 		{
-			if (counter > size / 2)
+			if (counter > ft_lstsize(*stack_b) / 2)
 				while (counter++ < ft_lstsize(*stack_a))
 					ft_swapper(stack_a, stack_b, RB);
 			else
