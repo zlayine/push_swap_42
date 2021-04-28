@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:54:07 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/26 12:23:48 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:28:15 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				get_next_line(int fd, char **line);
 char			**ft_arrdup(char **arr);
 int				ft_arr_len(char **arr);
 char			*ft_strlower(char *s);
+void			ft_arr_del(char **arr);
 
 typedef struct	s_list
 {
@@ -87,10 +88,10 @@ typedef struct	s_list
 
 void			ft_lstadd_back(t_list **alst, t_list *new);
 void			ft_lstadd_front(t_list **alst, t_list *new);
-void			ft_lstdelone(t_list *lst, void (*del)(void *));
+void			ft_lstdelone(t_list *lst);
 t_list			*ft_lstnew(int content);
 int				ft_lstsize(t_list *lst);
-void			ft_lstclear(t_list **lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst);
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lst_sort(t_list *lst);

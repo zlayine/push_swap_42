@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 10:47:41 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 13:12:34 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,6 @@ t_list *ft_swap_3(t_list *stack)
 		return stack;
 	mid = stack->next;
 	last = mid->next;
-	// if (stack->content < mid->content)
-	// {
-	// 	if (stack->content < last->content && mid->content > last->content)
-	// 	{
-	// 		ft_swapper(&stack, NULL, SA);
-	// 		ft_swapper(&stack, NULL, RA);
-	// 	}
-	// 	else if (stack->content > last->content && mid->content > last->content)
-	// 		ft_swapper(&stack, NULL, RRA);
-	// }
-	// else
-	// {
-	// 	if (mid->content < last->content && last->content > stack->content)
-	// 		ft_swapper(&stack, NULL, SA);
-	// 	else if (mid->content < last->content)
-	// 		ft_swapper(&stack, NULL, RA);
-	// 	else
-	// 	{
-	// 		ft_swapper(&stack, NULL, SA);
-	// 		ft_swapper(&stack, NULL, RRA);
-	// 	}
-	// }
 	if (stack->content < mid->content && stack->content < last->content && mid->content > last->content)
 	{
 		ft_swapper(&stack, NULL, SA);
@@ -74,19 +52,16 @@ int get_median(t_list *stack)
 	t_list *new;
 	t_list *tmp;
 	int size;
+	int res;
 
 	new = ft_lst_clone(stack);
 	tmp = ft_lst_sort(new);
 	size = ft_lstsize(tmp) / 2;
 	while (size--)
 		tmp = tmp->next;
-	return tmp->content;
-}
-
-int get_max(t_list **stack)
-{
-
-	return 0;
+	// res = tmp->content;
+	// ft_lstclear(&new);
+	return (tmp->content);
 }
 
 int *fetch_medians(t_list *stack, int size, int total)
@@ -108,9 +83,8 @@ int *fetch_medians(t_list *stack, int size, int total)
 		medians[i] = tmp->content;
 		i++;
 	}
-
 	medians[i] = 0;
-	return medians;
+	return (medians);
 }
 
 int *get_medians(t_list *stack)
@@ -125,39 +99,47 @@ int *get_medians(t_list *stack)
 	size = ft_lstsize(tmp);
 	if (size <= 20)
 		medians = fetch_medians(tmp, size / 2, 2);
-	else if (size < 500)
+	else if (size <= 100)
 		medians = fetch_medians(tmp, size / 5, 5);
-	else if (size >= 500)
+	else if (size > 100)
 		medians = fetch_medians(tmp, size / 12, 12);
-	return medians;
+	ft_lstclear(&new);
+	return (medians);
 }
 
 void ft_swap_5(t_list **stack_a, t_list **stack_b)
 {
 	int mid;
 	t_list *tmp;
+	int max;
 
 	mid = get_median(*stack_a);
 	tmp = *stack_a;
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		tmp = *stack_a;
-		if (ft_lstsize(*stack_a) == 3)
-		{
-			*stack_a = ft_swap_3(*stack_a);
-			ft_swap_2(stack_b, 0);
-			ft_swapper(stack_a, stack_b, PA);
-			ft_swapper(stack_a, stack_b, PA);
-			if (!ft_sorted(*stack_a))
-				ft_swapper(stack_a, NULL, SA);
-			break;
-		}
-		else if (tmp->content < mid)
-			ft_swapper(stack_a, stack_b, PB);
-		else if (tmp->content > mid)
-			ft_swapper(stack_a, stack_b, RRA);
+		max = get_max_list(*stack_a);
+		if (max == 0)
+			ft_swapper(stack_a, stack_b, RA);
 		else
-			ft_swapper(stack_a, stack_b, SA);
+		{
+			if (ft_lstsize(*stack_a) == 3)
+			{
+				*stack_a = ft_swap_3(*stack_a);
+				ft_swap_2(stack_b, 0);
+				ft_swapper(stack_a, stack_b, PA);
+				ft_swapper(stack_a, stack_b, PA);
+				if (!ft_sorted(*stack_a))
+					ft_swapper(stack_a, NULL, SA);
+				break;
+			}
+			else if (tmp->content < mid)
+				ft_swapper(stack_a, stack_b, PB);
+			else if (tmp->content > mid)
+				ft_swapper(stack_a, stack_b, RA);
+			else
+				ft_swapper(stack_a, stack_b, SA);
+		}
 	}
 }
 
@@ -168,7 +150,7 @@ int arr_len(int *arr)
 	i = 0;
 	while (arr[i])
 		i++;
-	return i;
+	return (i);
 }
 
 void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
@@ -217,7 +199,7 @@ int get_max_list(t_list *stack)
 		counter++;
 		tmp = tmp->next;
 	}
-	return save;
+	return (save);
 }
 
 int get_min_list(t_list *stack)
@@ -241,7 +223,7 @@ int get_min_list(t_list *stack)
 		counter++;
 		tmp = tmp->next;
 	}
-	return save;
+	return (save);
 }
 
 void minimize_a(t_list **stack_a, t_list **stack_b)
@@ -290,7 +272,7 @@ void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 	{
 		save = counter;
 		if (counter > ft_lstsize(*stack_b) / 2)
-			while (counter++ < ft_lstsize(*stack_a))
+			while (counter++ < ft_lstsize(*stack_b))
 				ft_swapper(stack_a, stack_b, RRB);
 		else
 			while (counter--)
@@ -302,7 +284,7 @@ void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 		else
 		{
 			if (counter > ft_lstsize(*stack_b) / 2)
-				while (counter++ < ft_lstsize(*stack_a))
+				while (counter++ < ft_lstsize(*stack_b))
 					ft_swapper(stack_a, stack_b, RB);
 			else
 				while (counter--)
@@ -331,7 +313,7 @@ void ft_swap_big(t_list **stack_a, t_list **stack_b)
 		else
 			minimize_a(stack_a, stack_b);
 	}
-	print_stacks(*stack_a, *stack_b);
+	ft_del(mids);
 }
 
 void ft_push_swap(t_list **stack_a, t_list **stack_b)
@@ -357,8 +339,6 @@ int main(int argc, char **argv)
 	t_list *stack_a;
 	t_list *stack_b;
 
-	//check duplications
-	// allow spaces
 	if (!valid_args(argv))
 	{
 		puts("Error");
@@ -366,7 +346,10 @@ int main(int argc, char **argv)
 	}
 	stack_b = NULL;
 	stack_a = ft_add_items(argc, argv);
+	if (!stack_a)
+		return 0;
 	// print_stacks(stack_a, stack_b);
 	ft_push_swap(&stack_a, &stack_b);
 	// print_stacks(stack_a, stack_b);
+	ft_lstclear(&stack_a);
 }

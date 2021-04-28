@@ -16,16 +16,59 @@ t_list *ft_lst_clone(t_list *list)
 	while (list)
 	{
 		if (!clone)
-		{
 			clone = ft_lstnew(list->content);
-		}
 		else
-		{
 			ft_lstadd_back(&clone, ft_lstnew(list->content));
-		}
 		list = list->next;
 	}
-	return clone;
+	return (clone);
+}
+
+int ft_lst_item_exist(t_list *stack, int num)
+{
+	t_list *tmp;
+
+	tmp = stack;
+	while (tmp)
+	{
+		if (tmp->content == num)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int add_number(t_list **stack, char *str)
+{
+	int item;
+
+	item = ft_atoi(str);
+	if (ft_lst_item_exist(*stack, item))
+		return (0);
+	if (*stack)
+		ft_stack_add(stack, item);
+	else
+		*stack = ft_lstnew(item);
+	return (1);
+}
+
+int add_numbers(t_list **stack, char *str)
+{
+	int j;
+	char **numbers;
+
+	j = -1;
+	numbers = ft_split(str, ' ');
+	while (numbers[++j])
+	{
+		if (!add_number(stack, numbers[j]))
+		{
+			ft_arr_del(numbers);
+			return 0;
+		}
+	}
+	ft_arr_del(numbers);
+	return 1;
 }
 
 t_list *ft_add_items(int total, char **argv)
@@ -33,18 +76,20 @@ t_list *ft_add_items(int total, char **argv)
 	int i;
 	int item;
 	t_list *stack;
+	int j;
 
 	i = 0;
 	stack = NULL;
 	while (++i < total)
 	{
-		item = ft_atoi(argv[i]);
-		if (stack)
-			ft_stack_add(&stack, item);
-		else
-			stack = ft_lstnew(item);
+		if ((ft_strchr(argv[i], ' ') && !add_numbers(&stack, argv[i])) ||
+			(!ft_strchr(argv[i], ' ') && !add_number(&stack, argv[i])))
+		{
+			ft_lstclear(&stack);
+			return (NULL);
+		}
 	}
-	return stack;
+	return (stack);
 }
 
 void ft_lst_swap(t_list *a, char *action)
@@ -195,25 +240,53 @@ int ft_sorted(t_list *stack)
 		if (stack->content < stack->next->content)
 			stack = stack->next;
 		else
-			return 0;
+			return (0);
 	}
-	return 1;
+	return (1);
+}
+
+int check_number(char *num)
+{
+	int i;
+
+	i = -1;
+	if (num[0] == '-')
+		i++;
+	if (!num[i + 1])
+		return (0);
+	while (num[++i])
+	{
+		if (!ft_isdigit(num[i]))
+			return (0);
+	}
+	return (1);
 }
 
 int valid_args(char **argv)
 {
 	int i;
 	int j;
+	char **numbers;
 
 	i = 0;
 	while (argv[++i])
 	{
-		j = -1;
-		while (argv[i][++j])
+		if (ft_strchr(argv[i], ' '))
 		{
-			if (!ft_isdigit(argv[i][j]))
-				return 0;
+			j = -1;
+			numbers = ft_split(argv[i], ' ');
+			while (numbers[++j])
+			{
+				if (!check_number(numbers[j]))
+				{
+					ft_arr_del(numbers);
+					return (0);
+				}
+			}
+			ft_arr_del(numbers);
 		}
+		else if (!check_number(argv[i]))
+			return (0);
 	}
-	return 1;
+	return (1);
 }
