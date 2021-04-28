@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 16:40:57 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:41:34 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 			rotate_stack_b(stack_b, RRB, 0, counter);
 	}
 }
-
+//ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 void	ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
