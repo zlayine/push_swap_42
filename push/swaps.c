@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:28 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 13:46:57 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:39:14 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 {
-	int		*mids;
+	char	**mids;
 	int		current;
 	t_list	*tmp;
 	int		size;
@@ -22,6 +22,7 @@ void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 	mids = get_medians(*stack_a);
 	tmp = *stack_a;
 	ft_split_to_b(stack_a, stack_b, mids);
+	print_stacks(*stack_a, *stack_b);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		size = ft_lstsize(*stack_a);

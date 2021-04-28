@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:22:11 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 13:32:10 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:40:11 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,31 @@ int	get_median(t_list *stack)
 	return (res);
 }
 
-int	*fetch_medians(t_list *stack, int size, int total)
+char	**fetch_medians(t_list *stack, int size, int total)
 {
 	int		i;
 	int		save;
-	int		*medians;
+	char	**medians;
 	t_list	*tmp;
 
 	i = 0;
 	tmp = stack;
 	save = size;
-	medians = malloc(sizeof(int) * (total + 1));
-	while (i < total - 1 && tmp->next)
+	medians = malloc(sizeof(char*) * (total + 1));
+	while (i < total && tmp->next)
 	{
 		size = save;
 		while (size-- && tmp->next)
 			tmp = tmp->next;
-		medians[i] = tmp->content;
+		medians[i] = ft_itoa(tmp->content);
+		printf("MD: %s\n", medians[i]);
 		i++;
 	}
 	medians[i] = 0;
 	return (medians);
 }
 
-int	*get_medians(t_list *stack)
+char	**get_medians(t_list *stack)
 {
 	t_list	*new;
 	t_list	*tmp;

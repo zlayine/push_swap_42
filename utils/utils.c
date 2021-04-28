@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:23 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 13:20:24 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:25:47 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 		ft_lst_reshift(stack_a, action);
 		ft_lst_reshift(stack_b, action);
 	}
-	puts(action);
+	// puts(action);
 }
 
 void print_stacks(t_list *a, t_list *b)
@@ -260,7 +260,8 @@ int ft_sorted(t_list *stack)
 int check_number(char *num)
 {
 	int i;
-
+	int item;
+	
 	i = -1;
 	if (num[0] == '-')
 		i++;
@@ -271,6 +272,10 @@ int check_number(char *num)
 		if (!ft_isdigit(num[i]))
 			return (0);
 	}
+	// item = ft_atoi(num);
+	// printf("%d %d\n", item > INT_MAX);
+	// if (item > INT_MAX || item < INT_MIN)
+		// return (0);
 	return (1);
 }
 
@@ -281,6 +286,8 @@ int valid_args(char **argv)
 	char **numbers;
 
 	i = 0;
+	if (!argv[1])
+		return (0);
 	while (argv[++i])
 	{
 		if (ft_strchr(argv[i], ' '))

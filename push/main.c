@@ -6,27 +6,30 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 13:53:10 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:40:57 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push.h"
 
-void	ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
+void	ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 {
 	t_list	*tmp;
 	int		current;
 	int		len;
 	int		save;
+	int curr;
 
 	current = 0;
 	tmp = *stack_a;
-	len = ft_lstsize(*stack_a) / (arr_len(mids) + 1);
-	while (mids[current])
+	len = ft_lstsize(*stack_a) / (ft_arr_len(mids));
+	while (current < ft_arr_len(mids))
 	{
 		save = len;
 		while (save)
 		{
+			// blan dial amine
+			curr = ft_atoi(mids[current]);
 			if (tmp->content < mids[current] && save--)
 				ft_swapper(stack_a, stack_b, PB);
 			else
@@ -34,6 +37,7 @@ void	ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
 			tmp = *stack_a;
 		}
 		current++;
+		print_stacks(*stack_a, *stack_b);
 	}
 }
 
@@ -43,6 +47,7 @@ void	minimize_a(t_list **stack_a, t_list **stack_b)
 	int	save;
 
 	counter = get_min_list(*stack_a);
+	// printf("%d \n", counter);
 	if (counter == 1)
 	{
 		ft_swapper(stack_a, stack_b, SA);
@@ -61,6 +66,7 @@ void	minimize_a(t_list **stack_a, t_list **stack_b)
 			rotate_stack_a(stack_a, RA, 1, counter);
 		else
 			rotate_stack_a(stack_a, RRA, 0, counter);
+		// print_stacks(*stack_a, *stack_b);
 	}
 }
 
@@ -124,7 +130,10 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	stack_a = ft_add_items(argc, argv);
 	if (!stack_a)
-		return (0);
+	{
+		ft_putendl_fd("Error", 1);
+		return (1);
+	}
 	ft_push_swap(&stack_a, &stack_b);
 	ft_lstclear(&stack_a);
 	return (0);

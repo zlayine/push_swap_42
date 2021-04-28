@@ -1,5 +1,6 @@
 #include "../libft/libft.h"
 #include "stdio.h"
+#include "limits.h"
 
 #define SA "sa"
 #define SB "sb"
@@ -27,11 +28,11 @@ int valid_args(char **argv);
 t_list *ft_lst_clone(t_list *list);
 t_list *ft_swap_3(t_list *stack);
 int get_median(t_list *stack);
-int *fetch_medians(t_list *stack, int size, int total);
-int *get_medians(t_list *stack);
+char **fetch_medians(t_list *stack, int size, int total);
+char **get_medians(t_list *stack);
 void ft_swap_5(t_list **stack_a, t_list **stack_b);
 int arr_len(int *arr);
-void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids);
+void ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids);
 int get_max_list(t_list *stack);
 int get_min_list(t_list *stack);
 void minimize_a(t_list **stack_a, t_list **stack_b);
