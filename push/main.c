@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/27 17:01:43 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/28 10:41:20 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int get_median(t_list *stack)
 
 int get_max(t_list **stack)
 {
-	
+
 	return 0;
 }
 
@@ -183,7 +183,7 @@ void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
 	current = 0;
 	tmp = *stack_a;
 	len = ft_lstsize(*stack_a) / (arr_len(mids) + 1);
-	printf("len split: %d\n", len);
+	// printf("len split: %d\n", len);
 	while (mids[current])
 	{
 		save = len;
@@ -199,28 +199,140 @@ void ft_split_to_b(t_list **stack_a, t_list **stack_b, int *mids)
 		}
 		current++;
 	}
-	print_stacks(*stack_a, *stack_b);
+	// print_stacks(*stack_a, *stack_b);
 }
 
+void minimize_a(t_list **stack_a, t_list **stack_b)
+{
+	int size;
+	t_list *min;
+	t_list *tmp;
+	int counter;
+	int save;
+	char *action;
 
+	counter = 0;
+	size = ft_lstsize(*stack_a);
+	min = *stack_a;
+	tmp = (*stack_a)->next;
+	while (tmp)
+	{
+		if (min->content > tmp->content)
+		{
+			min = tmp;
+			counter++;
+		}
+		tmp = tmp->next;
+	}
+	save = counter;
+	if (counter == 1)
+	{
+		ft_swapper(stack_a, stack_b, SA);
+		ft_swapper(stack_a, stack_b, PB);
+	}
+	else
+	{
+		if (counter > size / 2)
+			while (counter++ < ft_lstsize(*stack_a))
+				ft_swapper(stack_a, stack_b, RRA);
+		else
+			while (counter--)
+				ft_swapper(stack_a, stack_b, RA);
+		ft_swapper(stack_a, stack_b, PB);
+		counter = save;
+		if (counter > size / 2)
+			while (counter++ < ft_lstsize(*stack_a))
+				ft_swapper(stack_a, stack_b, RA);
+		else
+			while (counter--)
+				ft_swapper(stack_a, stack_b, RRA);
+	}
+}
+
+int		get_min_max(t_list *stack)
+{
+	int counter;
+	int save;
+	t_list *tmp;
+	t_list *curr;
+	
+	counter = 0;
+	save = 0;
+	curr = stack;
+	tmp = stack;
+	while (tmp)
+	{
+		if (curr->content < tmp->content)
+		{
+			curr = tmp;
+			save = counter;
+		}
+		counter++;
+		tmp = tmp->next;
+	}
+	return save;
+}
+
+void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
+{
+	int size;
+	int counter;
+	int save;
+
+	save = 0;
+	size = ft_lstsize(*stack_b);
+	counter = get_min_max(*stack_b);
+	if (counter == 1)
+	{
+		ft_swapper(stack_a, stack_b, SB);
+		ft_swapper(stack_a, stack_b, PA);
+	}
+	else
+	{
+		save = counter;
+		if (counter > size / 2)
+			while (counter++ < ft_lstsize(*stack_a))
+				ft_swapper(stack_a, stack_b, RRB);
+		else
+			while (counter--)
+				ft_swapper(stack_a, stack_b, RB);
+		ft_swapper(stack_a, stack_b, PA);
+		counter = save;
+		if (ft_lstsize(*stack_b) == 1)
+			ft_swapper(stack_a, stack_b, PA);
+		else
+		{
+			if (counter > size / 2)
+				while (counter++ < ft_lstsize(*stack_a))
+					ft_swapper(stack_a, stack_b, RB);
+			else
+				while (counter--)
+					ft_swapper(stack_a, stack_b, RRB);
+		}
+	}
+}
 
 void ft_swap_big(t_list **stack_a, t_list **stack_b)
 {
 	int *mids;
 	int current;
 	t_list *tmp;
+	int size;
 
 	mids = get_medians(*stack_a);
 	tmp = *stack_a;
 	ft_split_to_b(stack_a, stack_b, mids);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
-		
+		size = ft_lstsize(*stack_a);
+		if (ft_sorted(*stack_a) && *stack_b)
+			ft_swap_from_b(stack_a, stack_b);
+		else if (size == 5)
+			ft_swap_5(stack_a, stack_b);
+		else
+			minimize_a(stack_a, stack_b);
 	}
-}
-
-void ft_swap_extra(t_list **stack_a, t_list **stack_b)
-{
+	print_stacks(*stack_a, *stack_b);
 }
 
 void ft_push_swap(t_list **stack_a, t_list **stack_b)
@@ -236,10 +348,8 @@ void ft_push_swap(t_list **stack_a, t_list **stack_b)
 			*stack_a = ft_swap_3(*stack_a);
 		else if (size <= 5)
 			ft_swap_5(stack_a, stack_b);
-		else if (size > 5 && size < 500)
+		else if (size > 5)
 			ft_swap_big(stack_a, stack_b);
-		else if (size > 500)
-			ft_swap_extra(stack_a, stack_b);
 	}
 }
 

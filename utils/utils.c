@@ -56,8 +56,6 @@ void ft_lst_swap(t_list *a, char *action)
 		tmp = a->content;
 		a->content = a->next->content;
 		a->next->content = tmp;
-		if (action)
-			puts(action);
 	}
 }
 
@@ -70,7 +68,6 @@ void ft_lst_move(t_list **a, t_list **b, char *action)
 		tmp = (*a)->next;
 		ft_lstadd_front(b, *a);
 		*a = tmp;
-		puts(action);
 	}
 }
 
@@ -86,7 +83,6 @@ void ft_lst_shift(t_list **stack, char *action)
 		*stack = (*stack)->next;
 		tmp->next = NULL;
 		last->next = tmp;
-		puts(action);
 	}
 }
 
@@ -108,9 +104,9 @@ void ft_lst_reshift(t_list **stack, char *action)
 			}
 			tmp = tmp->next;
 		}
-		last->next = *stack;
+		if (last)
+			last->next = *stack;
 		*stack = last;
-		puts(action);
 	}
 }
 
@@ -157,6 +153,7 @@ void ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 		ft_lst_reshift(stack_a, action);
 		ft_lst_reshift(stack_b, action);
 	}
+	puts(action);
 }
 
 void print_stacks(t_list *a, t_list *b)
