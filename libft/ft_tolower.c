@@ -6,11 +6,11 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:00:07 by zlayine           #+#    #+#             */
-/*   Updated: 2019/10/21 10:47:38 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:38:45 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		c = c + 32;

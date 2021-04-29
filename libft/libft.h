@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:54:07 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 12:28:15 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:37:42 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *haystack, const char *needle,
-	size_t len);
+					size_t len);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strtrim(char const *s1, char const *set);
 
@@ -80,7 +80,7 @@ int				ft_arr_len(char **arr);
 char			*ft_strlower(char *s);
 void			ft_arr_del(char **arr);
 
-typedef struct	s_list
+typedef struct s_list
 {
 	int				content;
 	struct s_list	*next;
@@ -96,6 +96,6 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lst_sort(t_list *lst);
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
-		void (*del)(void *));
+					void (*del)(void *));
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:23 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 11:36:14 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 12:24:20 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ t_list	*ft_add_items(int total, char **argv)
 	stack = NULL;
 	while (++i < total)
 	{
-		if ((ft_strchr(argv[i], ' ') && !add_numbers(&stack, argv[i])))
+		if (ft_strchr(argv[i], ' ') && !add_numbers(&stack, argv[i]))
 		{
 			ft_lstclear(&stack);
 			return (NULL);
 		}
-		else if (!add_number(&stack, argv[i]))
+		else if (!ft_strchr(argv[i], ' ') && !add_number(&stack, argv[i]))
 		{
 			ft_lstclear(&stack);
 			return (NULL);

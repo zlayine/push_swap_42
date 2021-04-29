@@ -6,17 +6,17 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:41:54 by zlayine           #+#    #+#             */
-/*   Updated: 2020/10/18 17:44:28 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:48:22 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		count_strs(char *str, char c)
+static int	count_strs(char *str, char c)
 {
-	int i;
-	int j;
-	int start;
+	int	i;
+	int	j;
+	int	start;
 
 	i = 0;
 	j = 0;
@@ -40,9 +40,9 @@ static int		count_strs(char *str, char c)
 	return (j);
 }
 
-char			**free_list(char **split)
+char	**free_list(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split[i])
@@ -51,11 +51,11 @@ char			**free_list(char **split)
 	return (NULL);
 }
 
-static char		**ft_make_index(char **split, char *str, char x)
+static char	**ft_make_index(char **split, char *str, char x)
 {
-	int i;
-	int j;
-	int c;
+	int	i;
+	int	j;
+	int	c;
 
 	i = -1;
 	j = -1;
@@ -64,8 +64,7 @@ static char		**ft_make_index(char **split, char *str, char x)
 	{
 		if (str[i] == x && j != -1)
 		{
-			if (!(split[c++] = ft_substr(str, j, i - j)))
-				return (free_list(split));
+			split[c++] = ft_substr(str, j, i - j);
 			j = -1;
 		}
 		else if (str[i] != x)
@@ -75,12 +74,11 @@ static char		**ft_make_index(char **split, char *str, char x)
 		}
 	}
 	if (j != -1)
-		if (!(split[c] = ft_substr(str, j, i - j)))
-			return (free_list(split));
+		split[c] = ft_substr(str, j, i - j);
 	return (split);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**r;
 	size_t	len;

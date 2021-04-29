@@ -6,15 +6,15 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 20:34:25 by zlayine           #+#    #+#             */
-/*   Updated: 2019/11/18 20:34:32 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:41:12 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_pow(int nb, int power)
+int	ft_pow(int nb, int power)
 {
-	int res;
+	int	res;
 
 	res = nb;
 	if (power < 0)

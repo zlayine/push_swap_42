@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:22:11 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 11:14:00 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 12:08:27 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**get_medians(t_list *stack)
 	else if (size <= 100)
 		medians = fetch_medians(tmp, size / 5, 5);
 	else if (size > 100)
-		medians = fetch_medians(tmp, size / 12, 12);
+		medians = fetch_medians(tmp, size / 13, 13);
 	ft_lstclear(&new);
 	return (medians);
 }

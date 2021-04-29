@@ -60,5 +60,8 @@ void		ft_lst_shift(t_list **stack);
 void		ft_lst_reshift(t_list **stack);
 int			ft_sorted(t_list *stack);
 int			check_bonus(char c);
+int			add_number(t_list **stack, char *str);
+int			add_numbers(t_list **stack, char *str);
+int			check_numbers(char *str);
 
 #endif

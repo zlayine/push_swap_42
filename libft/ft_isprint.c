@@ -6,11 +6,11 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:40:48 by zlayine           #+#    #+#             */
-/*   Updated: 2019/10/21 10:49:48 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:48:34 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c < 32 || c > 126)
 		return (0);

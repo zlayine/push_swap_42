@@ -6,15 +6,15 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 20:33:52 by zlayine           #+#    #+#             */
-/*   Updated: 2019/11/20 15:13:10 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:41:30 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nblen(long long n)
+int	ft_nblen(long long n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (n < 0)

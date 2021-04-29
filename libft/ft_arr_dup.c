@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 09:25:21 by zlayine           #+#    #+#             */
-/*   Updated: 2020/11/11 09:34:48 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:50:21 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ char	**ft_arrdup(char **arr)
 	char	**new_arr;
 
 	len = ft_arr_len(arr);
-	if (!(new_arr = (char **)malloc(sizeof(char *) * (len + 1))))
-		return (NULL);
+	new_arr = (char **)malloc(sizeof(char *) * (len + 1));
 	i = 0;
 	while (i < len)
 	{
 		str_len = (int)ft_strlen(arr[i]);
-		if (!(new_arr[i] = (char *)malloc(sizeof(char) * (str_len + 1))))
-			return (NULL);
+		new_arr[i] = (char *)malloc(sizeof(char) * (str_len + 1));
 		ft_strcpy(new_arr[i], arr[i]);
 		i++;
 	}

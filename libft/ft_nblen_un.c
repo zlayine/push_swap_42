@@ -6,16 +6,16 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:21:15 by zlayine           #+#    #+#             */
-/*   Updated: 2019/11/23 16:30:20 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:41:22 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int		ft_nblen_un(unsigned long long n)
+int	ft_nblen_un(unsigned long long n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (n)

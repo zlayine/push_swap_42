@@ -6,11 +6,11 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:12:35 by zlayine           #+#    #+#             */
-/*   Updated: 2019/10/21 10:49:37 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:48:38 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c < 48 || c > 57)
 		return (0);

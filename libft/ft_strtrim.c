@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 13:55:45 by zlayine           #+#    #+#             */
-/*   Updated: 2019/10/23 12:03:08 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:39:22 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static const char	*ft_trim_start(const char *s, const char *set)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -33,7 +33,7 @@ static const char	*ft_trim_start(const char *s, const char *set)
 	return (s);
 }
 
-static size_t		ft_trim_end(const char *s, const char *set)
+static size_t	ft_trim_end(const char *s, const char *set)
 {
 	size_t	len;
 	int		j;
@@ -53,7 +53,7 @@ static size_t		ft_trim_end(const char *s, const char *set)
 	return (len);
 }
 
-char				*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*r;
 	char	*tmp;
