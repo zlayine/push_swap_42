@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:24:39 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:28:34 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:59:20 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	check_number(char *num)
 {
 	int		i;
-	int		item;
 	char	*str;
 
 	i = -1;
@@ -31,8 +30,7 @@ int	check_number(char *num)
 		if (!ft_isdigit(num[i]))
 			return (0);
 	}
-	item = ft_atoi(num);
-	str = ft_itoa(item);
+	str = ft_itoa(ft_atoi(num));
 	if (ft_strcmp(str, num))
 	{
 		ft_del(str);

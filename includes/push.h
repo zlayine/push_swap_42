@@ -26,7 +26,8 @@ void		ft_lst_swap(t_list *a);
 void		ft_lst_move(t_list **a, t_list **b);
 void		ft_lst_shift(t_list **stack);
 void		ft_lst_reshift(t_list **stack);
-void		ft_swapper(t_list **stack_a, t_list **stack_b, char *action, int display);
+void		ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
+				int display);
 void		print_stacks(t_list *a, t_list *b);
 void		debug(t_list **stack_a, t_list **stack_b);
 int			ft_sorted(t_list *stack);

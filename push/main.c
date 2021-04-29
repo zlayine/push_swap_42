@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:54:27 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:57:45 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,18 @@ void	ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 {
 	t_list	*tmp;
 	int		current;
-	int		len;
 	int		save;
 	int		curr;
 
-	current = 0;
-	tmp = *stack_a;
-	len = ft_lstsize(*stack_a) / (ft_arr_len(mids));
-	while (current < ft_arr_len(mids) - 1)
+	current = -1;
+	while (++current < ft_arr_len(mids) - 1)
 	{
-		save = len;
+		save = ft_lstsize(*stack_a) / (ft_arr_len(mids));
 		while (save && tmp)
 		{
+			tmp = *stack_a;
 			curr = ft_atoi(mids[current]);
-			
-			if (tmp->content < curr )
+			if (tmp->content < curr)
 			{
 				if (tmp->content > tmp->next->content)
 					ft_swapper(stack_a, stack_b, SA, 1);
@@ -39,9 +36,7 @@ void	ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 			}
 			else
 				get_rot_less_med(stack_a, curr);
-			tmp = *stack_a;
 		}
-		current++;
 	}
 }
 

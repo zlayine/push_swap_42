@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:23 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:55:22 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:57:57 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	print_color(char *action)
 	ft_putstr("\e[0m");
 }
 
-void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action, int display)
+void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
+	int display)
 {
 	if (ft_swapper_a(stack_a, stack_b, action)
 		|| ft_swapper_b(stack_a, stack_b, action))
