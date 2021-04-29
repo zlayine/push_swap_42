@@ -236,11 +236,11 @@ void ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 		ft_putendl_fd("Error", 1);
 		return;
 	}
-	if (g_bonus == 'c')
+	if (g_bonus == 'c' || g_bonus == 1)
 		print_color(action);
 	else
 		ft_putendl_fd(action, 1);
-	if (g_bonus == 'v')
+	if (g_bonus == 'v' || g_bonus == 1)
 	{
 		if (!stack_a)
 			print_stacks(NULL, *stack_b);
@@ -314,7 +314,10 @@ int check_number(char *num)
 		i++;
 	if (num[i + 1] == 'v' || num[i + 1] == 'c')
 	{
-		g_bonus = num[i + 1];
+		if (g_bonus != 0)
+			g_bonus = 1;
+		else
+			g_bonus = num[i + 1];
 		return 1;
 	}
 	if (!num[i + 1] && num[i + 1] != 'v' && num[i + 1] != 'c')
