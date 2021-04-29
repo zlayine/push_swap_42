@@ -6,12 +6,19 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 18:13:34 by zlayine           #+#    #+#             */
-/*   Updated: 2020/11/17 17:40:40 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:20:56 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
+static char	*make_str(char *s1, char *s2)
+{
+	if (s1)
+		return (ft_strjoin(s1, s2));
+	return (ft_strdup(s2));
+}
 
 static int	free_bufs(char *b1, char *b2, int ret)
 {
@@ -23,57 +30,59 @@ static int	free_bufs(char *b1, char *b2, int ret)
 	return (ret);
 }
 
-static int	make_next_line(char **s, char **line, int fd)
+static int	make_next_line(char **s, char **line)
 {
 	int		i;
 	char	*tmp;
 
-	if (s[fd])
+	if (*s)
 	{
-		if (ft_strchr(s[fd], '\n'))
+		if (ft_strchr(*s, '\n'))
 		{
-			i = get_newln_len(s[fd]);
-			*line = new_str(*line, ft_substr(s[fd], 0, i));
-			s[fd] = new_str(s[fd], ft_strdup(s[fd] + i + 1));
-			return (!*line || !s[fd] ? -1 : 1);
-		}
-		else if (ft_strlen(s[fd]))
-		{
-			if (!(tmp = (*line) ? ft_strjoin(*line, s[fd]) : ft_strdup(s[fd])))
+			i = get_newln_len(*s);
+			*line = new_str(*line, ft_substr(*s, 0, i));
+			*s = new_str(*s, ft_strdup(*s + i + 1));
+			if (!*line || !*s)
 				return (-1);
-			s[fd] = new_str(s[fd], NULL);
+			return (1);
+		}
+		else if (ft_strlen(*s))
+		{
+			tmp = make_str(*line, *s);
+			*s = new_str(*s, NULL);
 			*line = new_str(*line, tmp);
 			return (0);
 		}
-		ft_del(s[fd]);
-		s[fd] = NULL;
+		ft_del(*s);
+		*s = NULL;
 	}
 	return (0);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char	*s[FD_SIZE];
+	static char	*s;
 	char		*buf;
 	char		*tmp;
 	int			rs;
 
-	if (!line || !(*line = ft_strdup("")) || BUFFER_SIZE <= 0 || fd < 0 ||
-		(rs = read(fd, NULL, 0) < 0) ||
-		!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (free_bufs(*line, NULL, -1));
-	while ((rs = read(fd, buf, BUFFER_SIZE)))
+	if (fd < 0 || !line || read(fd, NULL, 0) < 0)
+		return (-1);
+	*line = ft_strdup("");
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	rs = 1;
+	while (rs)
 	{
+		rs = read(fd, buf, BUFFER_SIZE);
 		buf[rs] = '\0';
-		if (!(tmp = (s[fd]) ? ft_strjoin(s[fd], buf) : ft_strdup(buf)))
-			return (free_bufs(*line, buf, -1));
-		s[fd] = new_str(s[fd], tmp);
+		tmp = make_str(s, buf);
+		s = new_str(s, tmp);
 		ft_del(buf);
-		if (ft_strchr(s[fd], '\n'))
+		if (ft_strchr(s, '\n'))
 			break ;
-		if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-			return (free_bufs(*line, s[fd], -1));
+		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	}
-	(rs == 0) ? ft_del(buf) : 0;
-	return (free_bufs(*line, s[fd], make_next_line(s, line, fd)));
+	if (rs == 0)
+		ft_del(buf);
+	return (free_bufs(*line, s, make_next_line(&s, line)));
 }
