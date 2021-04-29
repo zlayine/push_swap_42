@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:28 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 15:32:00 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 16:26:45 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 
 	mid = get_median(*stack_a);
 	tmp = *stack_a;
-	if (get_max_list(*stack_a) == 0)
-		ft_swapper(stack_a, stack_b, RA, 1);
+	// if (get_max_list(*stack_a) == 0)
+		// ft_swapper(stack_a, stack_b, RA, 1);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		tmp = *stack_a;
 		if (ft_lstsize(*stack_a) == 3)
 		{
 			*stack_a = ft_swap_3(*stack_a, *stack_b);
-			ft_swap_2(stack_b, 0);
-			ft_swapper(stack_a, stack_b, PA, 1);
-			ft_swapper(stack_a, stack_b, PA, 1);
+			if (ft_lstsize(*stack_b) == 2)
+			{
+				ft_swap_2(stack_b, 0);
+				ft_swapper(stack_a, stack_b, PA, 1);
+			}	ft_swapper(stack_a, stack_b, PA, 1);
 			break ;
 		}
 		else if (tmp->content < mid)
 			ft_swapper(stack_a, stack_b, PB, 1);
-		else /*if (tmp->content > mid)*/
+		else
 			ft_swapper(stack_a, stack_b, RA, 1);
-		// else
-		// 	ft_swapper(stack_a, stack_b, SA, 1);
 	}
 }
 
@@ -94,7 +94,7 @@ t_list	*ft_swap_3(t_list *stack_a, t_list *stack_b)
 
 void	ft_swap_2(t_list **stack, int rev)
 {
-	if ((*stack)->content > (*stack)->next->content)
+	if (!rev && (*stack)->content > (*stack)->next->content)
 		return ;
 	if (rev)
 		ft_swapper(stack, NULL, SA, 1);
