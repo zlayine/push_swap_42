@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:41 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 12:19:59 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:13:55 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_checker(t_list **stack_a, t_list **stack_b)
 	while (r)
 	{
 		r = get_next_line(0, &line);
-		ft_swapper(stack_a, stack_b, line);
+		if (r)
+			ft_swapper(stack_a, stack_b, line, 0);
 	}
 	if (ft_sorted(*stack_a))
 		ft_putendl_fd("OK", 1);
@@ -34,6 +35,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 
+	g_bonus = 0;
 	if (!valid_args(argv))
 	{
 		ft_putendl_fd("Error", 1);

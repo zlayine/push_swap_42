@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 12:23:30 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:12:07 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 		{
 			curr = ft_atoi(mids[current]);
 			if (tmp->content < curr && save--)
-				ft_swapper(stack_a, stack_b, PB);
+				ft_swapper(stack_a, stack_b, PB, 1);
 			else
 				get_rot_less_med(stack_a, curr);
 			tmp = *stack_a;
@@ -47,8 +47,8 @@ void	minimize_a(t_list **stack_a, t_list **stack_b)
 	counter = get_min_list(*stack_a);
 	if (counter == 1)
 	{
-		ft_swapper(stack_a, stack_b, SA);
-		ft_swapper(stack_a, stack_b, PB);
+		ft_swapper(stack_a, stack_b, SA, 1);
+		ft_swapper(stack_a, stack_b, PB, 1);
 	}
 	else
 	{
@@ -57,7 +57,7 @@ void	minimize_a(t_list **stack_a, t_list **stack_b)
 			rotate_stack_a(stack_a, RRA, 1, counter);
 		else
 			rotate_stack_a(stack_a, RA, 0, counter);
-		ft_swapper(stack_a, stack_b, PB);
+		ft_swapper(stack_a, stack_b, PB, 1);
 	}
 }
 
@@ -69,8 +69,8 @@ void	ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 	counter = get_max_list(*stack_b);
 	if (counter == 1)
 	{
-		ft_swapper(stack_a, stack_b, SB);
-		ft_swapper(stack_a, stack_b, PA);
+		ft_swapper(stack_a, stack_b, SB, 1);
+		ft_swapper(stack_a, stack_b, PA, 1);
 	}
 	else
 	{
@@ -79,9 +79,9 @@ void	ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 			rotate_stack_b(stack_b, RRB, 1, counter);
 		else
 			rotate_stack_b(stack_b, RB, 0, counter);
-		ft_swapper(stack_a, stack_b, PA);
+		ft_swapper(stack_a, stack_b, PA, 1);
 		if (ft_lstsize(*stack_b) == 1)
-			ft_swapper(stack_a, stack_b, PA);
+			ft_swapper(stack_a, stack_b, PA, 1);
 	}
 }
 

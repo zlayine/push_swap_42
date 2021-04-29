@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:25:18 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 11:25:46 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:13:01 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	debug(t_list **stack_a, t_list **stack_b)
 	while (r)
 	{
 		r = get_next_line(0, &line);
-		ft_swapper(stack_a, stack_b, line);
+		ft_swapper(stack_a, stack_b, line, 0);
 		print_stacks(*stack_a, *stack_b);
 	}
 }

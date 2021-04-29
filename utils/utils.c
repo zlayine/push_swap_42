@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:23 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 12:24:20 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:11:34 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	print_color(char *action)
 	ft_putstr("\e[0m");
 }
 
-void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
+void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action, int display)
 {
 	if (ft_swapper_a(stack_a, stack_b, action)
 		|| ft_swapper_b(stack_a, stack_b, action))
@@ -64,10 +64,13 @@ void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 		ft_putendl_fd("Error", 1);
 		return ;
 	}
-	if (g_bonus == 'c' || g_bonus == 1)
-		print_color(action);
-	else
-		ft_putendl_fd(action, 1);
+	if (display)
+	{
+		if (g_bonus == 'c' || g_bonus == 1)
+			print_color(action);
+		else
+			ft_putendl_fd(action, 1);
+	}
 	if (g_bonus == 'v' || g_bonus == 1)
 	{
 		if (!stack_a)
