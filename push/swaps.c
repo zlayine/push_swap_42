@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:28 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:12:43 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:54:14 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 		tmp = *stack_a;
 		if (ft_lstsize(*stack_a) == 3)
 		{
-			*stack_a = ft_swap_3(*stack_a);
-			ft_swap_2(stack_b, 1);
+			*stack_a = ft_swap_3(*stack_a, *stack_b);
+			ft_swap_2(stack_b, 0);
 			ft_swapper(stack_a, stack_b, PA, 1);
 			ft_swapper(stack_a, stack_b, PA, 1);
 			break ;
@@ -64,36 +64,40 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-t_list	*ft_swap_3(t_list *stack)
+t_list	*ft_swap_3(t_list *stack_a, t_list *stack_b)
 {
 	int	mid;
 	int	last;
 
-	if (ft_sorted(stack))
-		return (stack);
-	mid = stack->next->content;
-	last = stack->next->next->content;
-	if (stack->content < mid && stack->content < last && mid > last)
+	if (ft_sorted(stack_a))
+		return (stack_a);
+	mid = stack_a->next->content;
+	last = stack_a->next->next->content;
+	if (stack_a->content < mid && stack_a->content < last && mid > last)
 	{
-		ft_swapper(&stack, NULL, SA, 1);
-		ft_swapper(&stack, NULL, RA, 1);
+		ft_swapper(&stack_a, &stack_b, SA, 1);
+		ft_swapper(&stack_a, &stack_b, RA, 1);
 	}
-	else if (stack->content < mid && stack->content > last && mid > last)
-		ft_swapper(&stack, NULL, RRA, 1);
-	else if (mid < last && last > stack->content)
-		ft_swapper(&stack, NULL, SA, 1);
+	else if (stack_a->content < mid && stack_a->content > last && mid > last)
+		ft_swapper(&stack_a, &stack_b, RRA, 1);
+	else if (mid < last && last > stack_a->content)
+		ft_swapper(&stack_a, &stack_b, SA, 1);
 	else if (mid < last)
-		ft_swapper(&stack, NULL, RA, 1);
+		ft_swapper(&stack_a, &stack_b, RA, 1);
 	else
 	{
-		ft_swapper(&stack, NULL, SA, 1);
-		ft_swapper(&stack, NULL, RRA, 1);
+		ft_swapper(&stack_a, &stack_b, SA, 1);
+		ft_swapper(&stack_a, &stack_b, RRA, 1);
 	}
-	return (stack);
+	return (stack_a);
 }
 
 void	ft_swap_2(t_list **stack, int rev)
 {
-	if (ft_sorted(*stack) || rev)
+	if ((*stack)->content > (*stack)->next->content)
+		return ;
+	if (rev)
 		ft_swapper(stack, NULL, SA, 1);
+	else
+		ft_swapper(NULL, stack, SB, 1);
 }

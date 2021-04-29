@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 11:30:32 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:12:07 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:54:27 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	ft_split_to_b(t_list **stack_a, t_list **stack_b, char **mids)
 		while (save && tmp)
 		{
 			curr = ft_atoi(mids[current]);
-			if (tmp->content < curr && save--)
-				ft_swapper(stack_a, stack_b, PB, 1);
+			
+			if (tmp->content < curr )
+			{
+				if (tmp->content > tmp->next->content)
+					ft_swapper(stack_a, stack_b, SA, 1);
+				else if (save--)
+					ft_swapper(stack_a, stack_b, PB, 1);
+			}
 			else
 				get_rot_less_med(stack_a, curr);
 			tmp = *stack_a;
@@ -89,13 +95,13 @@ void	ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 
-	size = ft_lstsize(*stack_a);
 	if (!ft_sorted(*stack_a))
 	{
+		size = ft_lstsize(*stack_a);
 		if (size == 2)
 			ft_swap_2(stack_a, 1);
 		else if (size == 3)
-			*stack_a = ft_swap_3(*stack_a);
+			*stack_a = ft_swap_3(*stack_a, *stack_b);
 		else if (size <= 5)
 			ft_swap_5(stack_a, stack_b);
 		else if (size > 5)
@@ -109,6 +115,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_b;
 
 	g_bonus = 0;
+	g_debug = 0;
 	if (!valid_args(argv))
 	{
 		ft_putendl_fd("Error", 1);

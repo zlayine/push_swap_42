@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:24:39 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 12:22:49 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:28:34 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	check_number(char *num)
 		i++;
 	if (check_bonus(num[i + 1]))
 		return (1);
-	if (!num[i + 1] && num[i + 1] != 'v' && num[i + 1] != 'c')
+	if (!num[i + 1] && num[i + 1] != 'v' && num[i + 1] != 'c'
+		&& num[i + 1] != 'd')
 		return (0);
 	while (num[++i])
 	{
@@ -84,10 +85,8 @@ int	add_number(t_list **stack, char *str)
 {
 	int	item;
 
-	if (!ft_strcmp(str, "-v") || !ft_strcmp(str, "-c"))
-	{
+	if (!ft_strcmp(str, "-v") || !ft_strcmp(str, "-c") || !ft_strcmp(str, "-d"))
 		return (1);
-	}
 	item = ft_atoi(str);
 	if (ft_lst_item_exist(*stack, item))
 		return (0);

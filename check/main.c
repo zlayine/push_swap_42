@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:41 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:13:55 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:18:11 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_b;
 
 	g_bonus = 0;
+	g_debug = 0;
 	if (!valid_args(argv))
 	{
 		ft_putendl_fd("Error", 1);

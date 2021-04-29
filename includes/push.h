@@ -18,7 +18,7 @@
 # define RRR "rrr"
 
 char	g_bonus;
-char	g_sleep;
+char	g_debug;
 
 void		ft_stack_add(t_list **list, int item);
 t_list		*ft_add_items(int total, char **argv);
@@ -32,7 +32,7 @@ void		debug(t_list **stack_a, t_list **stack_b);
 int			ft_sorted(t_list *stack);
 int			valid_args(char **argv);
 t_list		*ft_lst_clone(t_list *list);
-t_list		*ft_swap_3(t_list *stack);
+t_list		*ft_swap_3(t_list *stack_a, t_list *stack_b);
 int			get_median(t_list *stack);
 char		**fetch_medians(t_list *stack, int size, int total);
 char		**get_medians(t_list *stack);

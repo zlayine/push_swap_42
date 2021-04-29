@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:22:40 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 11:13:33 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:33:07 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	get_rot_less_med(t_list **stack, int med)
 
 	tmp = *stack;
 	i = 0;
+	puts("rotate");
 	size = ft_lstsize(*stack);
 	while (tmp)
 	{

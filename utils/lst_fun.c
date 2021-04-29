@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:23:05 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 11:36:24 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:26:07 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int	check_bonus(char c)
 			g_bonus = 1;
 		else
 			g_bonus = c;
+		return (1);
+	}
+	else if (c == 'd')
+	{
+		g_debug = 1;
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:25:18 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:13:01 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:15:43 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_stacks(t_list *a, t_list *b)
 {
 	char	*str;
 
+	ft_putstr("--------------------\n");
 	ft_putstr("a => ");
 	while (a)
 	{
