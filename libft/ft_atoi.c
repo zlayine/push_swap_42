@@ -13,7 +13,7 @@
 static int	ft_check(long n, int sign)
 {
 	if (n < 0 && sign > 0)
-		return (-1);
+		return (0);
 	if (n > 0 && sign < 0)
 		return (0);
 	return ((int)n);
@@ -22,7 +22,7 @@ static int	ft_check(long n, int sign)
 int			ft_atoi(const char *str)
 {
 	int		i;
-	long	n;
+	int		n;
 	int		sign;
 
 	i = 0;

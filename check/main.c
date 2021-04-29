@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	}
 	stack_b = NULL;
 	stack_a = ft_add_items(argc, argv);
-	print_stacks(stack_a, stack_b);
+	// print_stacks(stack_a, stack_b);
 	ft_checker(&stack_a, &stack_b);
 	// print_stacks(stack_a, stack_b);
 	return (0);

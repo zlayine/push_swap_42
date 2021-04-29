@@ -31,7 +31,7 @@ void get_rot_less_med(t_list **stack, int med)
 	// printf("%d %d\n", i, med);
 	// puts("before");
 	// puts("rot");
-	print_stacks(*stack, NULL);
+	// print_stacks(*stack, NULL);
 	// printf("%d %d %d\n", tmp->content, size, i);
 	if (i <= size / 2)
 		rotate_stack_a(stack, RA, 0, i);
@@ -95,7 +95,7 @@ void minimize_a(t_list **stack_a, t_list **stack_b)
 			rotate_stack_a(stack_a, RA, 0, counter);
 		ft_swapper(stack_a, stack_b, PB);
 		// print_stacks(*stack_a, *stack_b);
-		counter = save;
+		// counter = save;
 		// if (counter > ft_lstsize(*stack_a) / 2)
 		// 	rotate_stack_a(stack_a, RA, 1, counter);
 		// else
@@ -123,7 +123,7 @@ void ft_swap_from_b(t_list **stack_a, t_list **stack_b)
 		else
 			rotate_stack_b(stack_b, RB, 0, counter);
 		ft_swapper(stack_a, stack_b, PA);
-		counter = save;
+		// counter = save;
 		if (ft_lstsize(*stack_b) == 1)
 			ft_swapper(stack_a, stack_b, PA);
 		// else if (ft_lstsize(*stack_b) > 1 && counter > ft_lstsize(*stack_b) / 2)

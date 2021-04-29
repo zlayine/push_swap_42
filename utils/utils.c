@@ -95,7 +95,7 @@ t_list *ft_add_items(int total, char **argv)
 	while (++i < total)
 	{
 		if ((ft_strchr(argv[i], ' ') && !add_numbers(&stack, argv[i])) ||
-			(!ft_strchr(argv[i], ' ') && !add_number(&stack, argv[i])))
+				(!ft_strchr(argv[i], ' ') && !add_number(&stack, argv[i])))
 		{
 			ft_lstclear(&stack);
 			return (NULL);
@@ -210,6 +210,11 @@ void ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 		ft_lst_reshift(stack_a, action);
 		ft_lst_reshift(stack_b, action);
 	}
+	else
+	{
+		ft_putendl_fd("Error", 1);
+		return;
+	}
 	puts(action);
 }
 
@@ -261,7 +266,8 @@ int check_number(char *num)
 {
 	int i;
 	int item;
-	
+	char *str;
+
 	i = -1;
 	if (num[0] == '-')
 		i++;
@@ -272,10 +278,14 @@ int check_number(char *num)
 		if (!ft_isdigit(num[i]))
 			return (0);
 	}
-	// item = ft_atoi(num);
-	// printf("%d %d\n", item > INT_MAX);
-	// if (item > INT_MAX || item < INT_MIN)
-		// return (0);
+	item = ft_atoi(num);
+	str = ft_itoa(item);
+	if (ft_strcmp(str, num))
+	{
+		ft_del(str);
+		return (0);
+	}
+	ft_del(str);
 	return (1);
 }
 
