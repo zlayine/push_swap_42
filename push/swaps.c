@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:28 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:54:14 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:32:00 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 	mids = get_medians(*stack_a);
 	tmp = *stack_a;
 	ft_split_to_b(stack_a, stack_b, mids);
+	ft_arr_del(mids);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		size = ft_lstsize(*stack_a);
@@ -32,7 +33,6 @@ void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 		else
 			minimize_a(stack_a, stack_b);
 	}
-	ft_del(mids);
 }
 
 void	ft_swap_5(t_list **stack_a, t_list **stack_b)
@@ -57,10 +57,10 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 		}
 		else if (tmp->content < mid)
 			ft_swapper(stack_a, stack_b, PB, 1);
-		else if (tmp->content > mid)
+		else /*if (tmp->content > mid)*/
 			ft_swapper(stack_a, stack_b, RA, 1);
-		else
-			ft_swapper(stack_a, stack_b, SA, 1);
+		// else
+		// 	ft_swapper(stack_a, stack_b, SA, 1);
 	}
 }
 

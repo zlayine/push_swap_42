@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:23 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:57:57 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:13:29 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
 	if (ft_swapper_a(stack_a, stack_b, action)
 		|| ft_swapper_b(stack_a, stack_b, action))
 		ft_putstr("");
-	else
+	else if (!action)
 	{
 		ft_putendl_fd("Error", 1);
 		return ;
