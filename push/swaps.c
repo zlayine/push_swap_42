@@ -6,23 +6,22 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:28 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 16:45:50 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:15:05 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push.h"
 
-void ft_swap_big(t_list **stack_a, t_list **stack_b)
+void	ft_swap_big(t_list **stack_a, t_list **stack_b)
 {
-	char **mids;
-	int current;
-	t_list *tmp;
-	int size;
+	char	**mids;
+	int		current;
+	t_list	*tmp;
+	int		size;
 
 	mids = get_medians(*stack_a);
 	tmp = *stack_a;
 	ft_split_to_b(stack_a, stack_b, mids);
-	// print_stacks(*stack_a, *stack_b);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		size = ft_lstsize(*stack_a);
@@ -36,15 +35,15 @@ void ft_swap_big(t_list **stack_a, t_list **stack_b)
 	ft_del(mids);
 }
 
-void ft_swap_5(t_list **stack_a, t_list **stack_b)
+void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 {
-	int mid;
-	t_list *tmp;
+	int		mid;
+	t_list	*tmp;
 
 	mid = get_median(*stack_a);
 	tmp = *stack_a;
-	// if (get_max_list(*stack_a) == 0)
-		// ft_swapper(stack_a, stack_b, RA);
+	if (get_max_list(*stack_a) == 0)
+		ft_swapper(stack_a, stack_b, RA);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		tmp = *stack_a;
@@ -54,7 +53,7 @@ void ft_swap_5(t_list **stack_a, t_list **stack_b)
 			ft_swap_2(stack_b, 1);
 			ft_swapper(stack_a, stack_b, PA);
 			ft_swapper(stack_a, stack_b, PA);
-			break;
+			break ;
 		}
 		else if (tmp->content < mid)
 			ft_swapper(stack_a, stack_b, PB);
@@ -65,10 +64,10 @@ void ft_swap_5(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-t_list *ft_swap_3(t_list *stack)
+t_list	*ft_swap_3(t_list *stack)
 {
-	int mid;
-	int last;
+	int	mid;
+	int	last;
 
 	if (ft_sorted(stack))
 		return (stack);
@@ -93,7 +92,7 @@ t_list *ft_swap_3(t_list *stack)
 	return (stack);
 }
 
-void ft_swap_2(t_list **stack, int rev)
+void	ft_swap_2(t_list **stack, int rev)
 {
 	if (ft_sorted(*stack) || rev)
 		ft_swapper(stack, NULL, SA);

@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:22:40 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 16:38:48 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:13:33 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,26 @@ int	get_min_list(t_list *stack)
 		tmp = tmp->next;
 	}
 	return (save);
+}
+
+void	get_rot_less_med(t_list **stack, int med)
+{
+	int		i;
+	int		size;
+	t_list	*tmp;
+
+	tmp = *stack;
+	i = 0;
+	size = ft_lstsize(*stack);
+	while (tmp)
+	{
+		if (tmp->content < med)
+			break ;
+		i++;
+		tmp = tmp->next;
+	}
+	if (i <= size / 2)
+		rotate_stack_a(stack, RA, 0, i);
+	else
+		rotate_stack_a(stack, RRA, 1, i);
 }

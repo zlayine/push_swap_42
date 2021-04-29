@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:41 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/28 13:37:04 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:11:01 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	main(int argc, char **argv)
 	}
 	stack_b = NULL;
 	stack_a = ft_add_items(argc, argv);
-	// print_stacks(stack_a, stack_b);
 	ft_checker(&stack_a, &stack_b);
-	// print_stacks(stack_a, stack_b);
 	return (0);
 }

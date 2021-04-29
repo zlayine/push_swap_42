@@ -6,7 +6,7 @@
 #    By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/14 12:07:00 by zlayine           #+#    #+#              #
-#    Updated: 2021/04/28 13:47:59 by zlayine          ###   ########.fr        #
+#    Updated: 2021/04/29 11:33:09 by zlayine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,11 @@ SWAP_SRC = push/main.c \
 
 CHECKER_SRC = check/main.c
 
-UTILS_SRC = utils/utils.c
+UTILS_SRC = utils/utils.c \
+	utils/debug.c \
+	utils/lst_fun.c \
+	utils/swap_fun.c \
+	utils/validation.c
 
 LIBFT = ./libft
 
