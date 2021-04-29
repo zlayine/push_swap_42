@@ -32,7 +32,6 @@ SWAP_LIB = puash_swap.a
 
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
-
 all: $(CHECKER) $(SWAP)
 
 $(LIBFT_LIB):
@@ -41,18 +40,17 @@ $(LIBFT_LIB):
 $(SWAP): $(SWAP_SRC) $(UTILS_OBJ) $(LIBFT_LIB)
 	@ar rcs $(SWAP_LIB) $(UTILS_OBJ)
 	@gcc $(SWAP_LIB) $(LIBFT_LIB) $(SWAP_SRC) -o $(SWAP)
-	@echo "SWAP IS READY! NO WWW PLEAAAAAAASE ADDDDDD --------------------------------------"
+	@echo "SWAP IS READY!"
 
 $(CHECKER): $(CHECKER_SRC) $(UTILS_OBJ) $(LIBFT_LIB)
 	@ar rcs $(SWAP_LIB) $(UTILS_OBJ)
 	@gcc $(SWAP_LIB) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
-	@echo "CHECKER IS READY! NO WWW PLEAAAAAAASE ADDDDDD --------------------------------------"
+	@echo "CHECKER IS READY!"
 
+bonus: $(CHECKER) $(SWAP)
 
 %.o: %.c
-	@gcc -c $< -o $@
-
-# @gcc -Wall -Wextra -Werror -c $< -o $@
+	@gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT)

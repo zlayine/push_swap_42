@@ -54,6 +54,10 @@ int add_number(t_list **stack, char *str)
 {
 	int item;
 
+	if (!ft_strcmp(str, "-v") || !ft_strcmp(str, "-c"))
+	{
+		return (1);
+	}
 	item = ft_atoi(str);
 	if (ft_lst_item_exist(*stack, item))
 		return (0);
@@ -76,19 +80,17 @@ int add_numbers(t_list **stack, char *str)
 		if (!add_number(stack, numbers[j]))
 		{
 			ft_arr_del(numbers);
-			return 0;
+			return (0);
 		}
 	}
 	ft_arr_del(numbers);
-	return 1;
+	return (1);
 }
 
 t_list *ft_add_items(int total, char **argv)
 {
 	int i;
-	int item;
 	t_list *stack;
-	int j;
 
 	i = 0;
 	stack = NULL;
@@ -104,7 +106,7 @@ t_list *ft_add_items(int total, char **argv)
 	return (stack);
 }
 
-void ft_lst_swap(t_list *a, char *action)
+void ft_lst_swap(t_list *a)
 {
 	int tmp;
 
@@ -116,7 +118,7 @@ void ft_lst_swap(t_list *a, char *action)
 	}
 }
 
-void ft_lst_move(t_list **a, t_list **b, char *action)
+void ft_lst_move(t_list **a, t_list **b)
 {
 	t_list *tmp;
 
@@ -128,7 +130,7 @@ void ft_lst_move(t_list **a, t_list **b, char *action)
 	}
 }
 
-void ft_lst_shift(t_list **stack, char *action)
+void ft_lst_shift(t_list **stack)
 {
 	t_list *tmp;
 	t_list *last;
@@ -143,11 +145,12 @@ void ft_lst_shift(t_list **stack, char *action)
 	}
 }
 
-void ft_lst_reshift(t_list **stack, char *action)
+void ft_lst_reshift(t_list **stack)
 {
 	t_list *tmp;
 	t_list *last;
 
+	last = NULL;
 	if (stack && *stack)
 	{
 		tmp = *stack;
@@ -167,72 +170,110 @@ void ft_lst_reshift(t_list **stack, char *action)
 	}
 }
 
-void ft_swapper_a(t_list **stack_a, t_list **stack_b, char *action)
+int ft_swapper_a(t_list **stack_a, t_list **stack_b, char *action)
 {
 	if (!ft_strcmp(action, SA))
-		ft_lst_swap(*stack_a, action);
+		ft_lst_swap(*stack_a);
 	else if (!ft_strcmp(action, PA))
-		ft_lst_move(stack_b, stack_a, action);
+		ft_lst_move(stack_b, stack_a);
 	else if (!ft_strcmp(action, RA))
-		ft_lst_shift(stack_a, action);
+		ft_lst_shift(stack_a);
 	else if (!ft_strcmp(action, RRA))
-		ft_lst_reshift(stack_a, action);
+		ft_lst_reshift(stack_a);
+	else
+		return 0;
+	return 1;
 }
 
-void ft_swapper_b(t_list **stack_a, t_list **stack_b, char *action)
+int ft_swapper_b(t_list **stack_a, t_list **stack_b, char *action)
 {
 	if (!ft_strcmp(action, SB))
-		ft_lst_swap(*stack_b, action);
+		ft_lst_swap(*stack_b);
 	else if (!ft_strcmp(action, PB))
-		ft_lst_move(stack_a, stack_b, action);
+		ft_lst_move(stack_a, stack_b);
 	else if (!ft_strcmp(action, RB))
-		ft_lst_shift(stack_b, action);
+		ft_lst_shift(stack_b);
 	else if (!ft_strcmp(action, RRB))
-		ft_lst_reshift(stack_b, action);
+		ft_lst_reshift(stack_b);
+	else
+		return (0);
+	return (1);
+}
+
+void print_color(char *action)
+{
+	if (ft_strchr(action, 's'))
+		ft_putstr("\033[32m");
+	else if (ft_strchr(action, 'p'))
+		ft_putstr("\033[35m");
+	else if (ft_strchr(action, 'r'))
+		ft_putstr("\033[36m");
+	ft_putendl_fd(action, 1);
+	ft_putstr("\e[0m");
 }
 
 void ft_swapper(t_list **stack_a, t_list **stack_b, char *action)
 {
-	ft_swapper_a(stack_a, stack_b, action);
-	ft_swapper_b(stack_a, stack_b, action);
-	if (!ft_strcmp(action, SS))
+	if (ft_swapper_a(stack_a, stack_b, action) || ft_swapper_b(stack_a, stack_b, action))
+		ft_putstr("");
+	else if (!ft_strcmp(action, SS))
 	{
-		ft_lst_swap(*stack_a, action);
-		ft_lst_swap(*stack_b, action);
+		ft_lst_swap(*stack_a);
+		ft_lst_swap(*stack_b);
 	}
 	else if (!ft_strcmp(action, RR))
 	{
-		ft_lst_shift(stack_a, action);
-		ft_lst_shift(stack_b, action);
+		ft_lst_shift(stack_a);
+		ft_lst_shift(stack_b);
 	}
 	else if (!ft_strcmp(action, RRR))
 	{
-		ft_lst_reshift(stack_a, action);
-		ft_lst_reshift(stack_b, action);
+		ft_lst_reshift(stack_a);
+		ft_lst_reshift(stack_b);
 	}
 	else
 	{
 		ft_putendl_fd("Error", 1);
 		return;
 	}
-	puts(action);
+	if (g_bonus == 'c')
+		print_color(action);
+	else
+		ft_putendl_fd(action, 1);
+	if (g_bonus == 'v')
+	{
+		if (!stack_a)
+			print_stacks(NULL, *stack_b);
+		else if (!stack_b)
+			print_stacks(*stack_a, NULL);
+		else
+			print_stacks(*stack_a, *stack_b);
+	}
 }
 
 void print_stacks(t_list *a, t_list *b)
 {
-	printf("a => ");
+	char *str;
+
+	ft_putstr("a => ");
 	while (a)
 	{
-		printf("%d ", a->content);
+		str = ft_itoa(a->content);
+		ft_putstr(str);
+		ft_putstr(" ");
+		ft_del(str);
 		a = a->next;
 	}
-	printf("\nb => ");
+	ft_putstr("\nb => ");
 	while (b)
 	{
-		printf("%d ", b->content);
+		str = ft_itoa(b->content);
+		ft_putstr(str);
+		ft_putstr(" ");
+		ft_del(str);
 		b = b->next;
 	}
-	printf("\n--------------------\n");
+	ft_putstr("\n--------------------\n");
 }
 
 void debug(t_list **stack_a, t_list **stack_b)
@@ -271,7 +312,12 @@ int check_number(char *num)
 	i = -1;
 	if (num[0] == '-')
 		i++;
-	if (!num[i + 1])
+	if (num[i + 1] == 'v' || num[i + 1] == 'c')
+	{
+		g_bonus = num[i + 1];
+		return 1;
+	}
+	if (!num[i + 1] && num[i + 1] != 'v' && num[i + 1] != 'c')
 		return (0);
 	while (num[++i])
 	{

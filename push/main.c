@@ -156,6 +156,7 @@ int main(int argc, char **argv)
 	t_list *stack_a;
 	t_list *stack_b;
 
+	g_bonus = 0;
 	if (!valid_args(argv))
 	{
 		ft_putendl_fd("Error", 1);
@@ -163,13 +164,13 @@ int main(int argc, char **argv)
 	}
 	stack_b = NULL;
 	stack_a = ft_add_items(argc, argv);
+	// print_stacks(stack_a, stack_b);
 	if (!stack_a)
 	{
 		ft_putendl_fd("Error", 1);
 		return (1);
 	}
 	ft_push_swap(&stack_a, &stack_b);
-	// print_stacks(stack_a, stack_b);
 	ft_lstclear(&stack_a);
 	return (0);
 }
