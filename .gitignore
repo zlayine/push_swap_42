@@ -5,3 +5,5 @@ push_swap
 checker
 out
 *dSYM
+.DS_Store
+.gitignore
