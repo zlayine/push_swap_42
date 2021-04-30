@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:20:28 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 16:26:45 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/30 13:29:23 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 				ft_swap_2(stack_b, 0);
 			ft_swapper(stack_a, stack_b, PA, 1);
 			ft_swapper(stack_a, stack_b, PA, 1);
-			break;
+			break ;
 		}
 		else if (tmp->content < mid)
 			ft_swapper(stack_a, stack_b, PB, 1);

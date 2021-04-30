@@ -6,7 +6,7 @@
 /*   By: zlayine <zlayine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:25:18 by zlayine           #+#    #+#             */
-/*   Updated: 2021/04/29 13:15:43 by zlayine          ###   ########.fr       */
+/*   Updated: 2021/04/30 13:29:33 by zlayine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void	debug(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-int		check_swap_action(char *action)
+int	check_swap_action(char *action)
 {
-	if (ft_strcmp(action, SS) && ft_strcmp(action, RRR) && ft_strcmp(action, RR))
+	if (ft_strcmp(action, SS) && ft_strcmp(action, RRR)
+		&& ft_strcmp(action, RR))
 		return (0);
 	return (1);
 }
