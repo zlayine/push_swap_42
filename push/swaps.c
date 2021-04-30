@@ -42,20 +42,19 @@ void	ft_swap_5(t_list **stack_a, t_list **stack_b)
 
 	mid = get_median(*stack_a);
 	tmp = *stack_a;
-	// if (get_max_list(*stack_a) == 0)
-		// ft_swapper(stack_a, stack_b, RA, 1);
+	if (get_max_list(*stack_a) == 0)
+		ft_swapper(stack_a, stack_b, RA, 1);
 	while (!ft_sorted(*stack_a) || *stack_b)
 	{
 		tmp = *stack_a;
 		if (ft_lstsize(*stack_a) == 3)
 		{
 			*stack_a = ft_swap_3(*stack_a, *stack_b);
-			if (ft_lstsize(*stack_b) == 2)
-			{
+			if (ft_lstsize(*stack_b) > 2)
 				ft_swap_2(stack_b, 0);
-				ft_swapper(stack_a, stack_b, PA, 1);
-			}	ft_swapper(stack_a, stack_b, PA, 1);
-			break ;
+			ft_swapper(stack_a, stack_b, PA, 1);
+			ft_swapper(stack_a, stack_b, PA, 1);
+			break;
 		}
 		else if (tmp->content < mid)
 			ft_swapper(stack_a, stack_b, PB, 1);
