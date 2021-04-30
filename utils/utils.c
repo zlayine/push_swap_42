@@ -54,16 +54,23 @@ void	print_color(char *action)
 	ft_putstr("\e[0m");
 }
 
-void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
+int		check_swap_action(char *action)
+{
+	if (ft_strcmp(action, SS) && ft_strcmp(action, RRR) && ft_strcmp(action, RR))
+		return (0);
+	return (1);
+}
+
+int	ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
 	int display)
 {
 	if (ft_swapper_a(stack_a, stack_b, action)
 		|| ft_swapper_b(stack_a, stack_b, action))
 		ft_putstr("");
-	else if (!action)
+	else if (!action || !check_swap_action(action))
 	{
 		ft_putendl_fd("Error", 1);
-		return ;
+		return (0);
 	}
 	if (display && (g_bonus == 'c' || g_bonus == 1))
 		print_color(action);
@@ -80,6 +87,7 @@ void	ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
 		if (g_debug)
 			sleep(1);
 	}
+	return (1);
 }
 
 t_list	*ft_add_items(int total, char **argv)

@@ -52,3 +52,4 @@ void	debug(t_list **stack_a, t_list **stack_b)
 		print_stacks(*stack_a, *stack_b);
 	}
 }
+

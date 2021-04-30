@@ -22,7 +22,14 @@ void	ft_checker(t_list **stack_a, t_list **stack_b)
 	{
 		r = get_next_line(0, &line);
 		if (r)
-			ft_swapper(stack_a, stack_b, line, 0);
+		{
+			r = ft_swapper(stack_a, stack_b, line, 0);
+			if (!r)
+			{
+				ft_del(line);
+				return ;
+			}
+		}
 		ft_del(line);
 	}
 	if (ft_sorted(*stack_a) && !*stack_b)
