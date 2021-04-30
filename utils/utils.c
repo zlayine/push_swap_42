@@ -54,13 +54,6 @@ void	print_color(char *action)
 	ft_putstr("\e[0m");
 }
 
-int		check_swap_action(char *action)
-{
-	if (ft_strcmp(action, SS) && ft_strcmp(action, RRR) && ft_strcmp(action, RR))
-		return (0);
-	return (1);
-}
-
 int	ft_swapper(t_list **stack_a, t_list **stack_b, char *action,
 	int display)
 {

@@ -65,5 +65,6 @@ int			check_bonus(char c);
 int			add_number(t_list **stack, char *str);
 int			add_numbers(t_list **stack, char *str);
 int			check_numbers(char *str);
+int			check_swap_action(char *action);
 
 #endif

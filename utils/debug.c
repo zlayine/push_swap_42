@@ -53,3 +53,9 @@ void	debug(t_list **stack_a, t_list **stack_b)
 	}
 }
 
+int		check_swap_action(char *action)
+{
+	if (ft_strcmp(action, SS) && ft_strcmp(action, RRR) && ft_strcmp(action, RR))
+		return (0);
+	return (1);
+}
